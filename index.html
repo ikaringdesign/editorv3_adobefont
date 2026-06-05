@@ -750,6 +750,8 @@ function redraw(){
 }
 
 function generate(useFolder=false){
+  const rW=+document.getElementById('refW').value||1920;
+  const rH=+document.getElementById('refH').value||1080;
   const textStyles={};
   TS_DEFS.forEach(ts=>{
     const obj={font:gs('ts_'+ts.id+'_font')||ts.font,size:(gs('ts_'+ts.id+'_size')||String(parseInt(ts.size)||30))+'px',color:gs('ts_'+ts.id+'_color')||ts.color,align:gs('ts_'+ts.id+'_align')||ts.align,weight:gs('ts_'+ts.id+'_weight')||ts.weight};
@@ -1067,7 +1069,7 @@ ${fontPreloadDivs}
     </div>
     <div class="preview-section">
         <div class="preview-label">미리보기</div>
-        <canvas id="previewCanvas" width="1920" height="1080"></canvas>
+        <canvas id="previewCanvas" width="${rW}" height="${rH}"></canvas>
     </div>
 </div>
 <div class="drum-overlay" id="drumOverlay" onclick="closeDrumPicker()"></div>
