@@ -541,6 +541,27 @@ function syncTxt(id){const v=document.getElementById(id).value;if(/^#[0-9a-fA-F]
 })();
 
 function parseFontFace(code){const family=(code.match(/font-family\s*:\s*['"]?([^'";]+)['"]?\s*;/)||[])[1]?.trim()||'';const srcMatch=code.match(/url\s*\(\s*['"]?([^'")\s]+)['"]?\s*\)/);const src=srcMatch?srcMatch[1].trim():'';const fmt=(code.match(/format\s*\(\s*['"]?([^'")\s]+)['"]?\s*\)/)||[])[1]?.trim()||'woff2';const weight=(code.match(/font-weight\s*:\s*([^;]+);/)||[])[1]?.trim()||'normal';const display=(code.match(/font-display\s*:\s*([^;]+);/)||[])[1]?.trim()||'swap';return{family,src,fmt,weight,display};}
+function applyAdobeKit(){
+  const kitId=(document.getElementById('adobeKitId')?.value||'').trim();
+  const statusEl=document.getElementById('adobeKitStatus');
+  if(!kitId){statusEl.textContent='Kit ID를 입력해주세요';statusEl.style.color='#ff8888';return;}
+  const old=document.getElementById('__typekit_preview__');
+  if(old)old.remove();
+  const tk=document.createElement('script');
+  tk.id='__typekit_preview__';
+  tk.src='https://use.typekit.net/'+kitId+'.js';
+  tk.onload=function(){
+    try{
+      Typekit.load({kitId:kitId,scriptTimeout:3000,async:true,
+        active:function(){statusEl.textContent='✅ 적용됨 ('+kitId+')';statusEl.style.color='#44ff88';document.fonts.ready.then(()=>{if(typeof redraw==='function')redraw();});},
+        inactive:function(){statusEl.textContent='❌ Kit 로드 실패';statusEl.style.color='#ff8888';}
+      });
+    }catch(e){statusEl.textContent='❌ 오류: '+e.message;statusEl.style.color='#ff8888';}
+  };
+  tk.onerror=function(){statusEl.textContent='❌ Kit JS 로드 실패 (ID 확인)';statusEl.style.color='#ff8888';};
+  statusEl.textContent='로딩 중...';statusEl.style.color='#aaa';
+  document.head.appendChild(tk);
+}
 function addFontEntry(data={}){
   const idx=fontEntries.length;
   fontEntries.push(data);
