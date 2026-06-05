@@ -1175,6 +1175,7 @@ function collectState(){
    'abs_left','abs_right','abp_x','abp_y','artistBg_align'
   ].forEach(id=>{const el=document.getElementById(id);if(el)s[id]=el.value;});
   s.artistBg_use=document.getElementById('artistBg_use')?.checked??true;
+  s.showTextPreview=document.getElementById('showTextPreview')?.checked??false;
   TS_DEFS.forEach(ts=>{['font','size','weight','color','align','sc','sw','rot','lh','ls','subFont','shc','shb','shx','shy'].forEach(k=>{const el=document.getElementById('ts_'+ts.id+'_'+k);if(el)s['ts_'+ts.id+'_'+k]=el.value;});});
   s._adobeKitId=(document.getElementById('adobeKitId')?.value||'').trim();
   s._showArtBy=document.getElementById('show_artby')?.checked!==false;
@@ -1209,6 +1210,11 @@ function applyState(s){
     setTimeout(()=>applyAdobeKit(),300);
   }
   if(s._fonts&&s._fonts.length){document.getElementById('fontList').innerHTML='';fontEntries=[];s._fonts.forEach(f=>addFontEntry(f));}
+  // showTextPreview가 JSON에 없는 구버전 파일이면 자동으로 켜기
+  if(s.showTextPreview==null){
+    const el=document.getElementById('showTextPreview');
+    if(el)el.checked=true;
+  }
   if(s.artistBg_use!==undefined){const cb=document.getElementById('artistBg_use');if(cb)cb.checked=!!s.artistBg_use;}
   if(s.artistBg_align){const sel=document.getElementById('artistBg_align');if(sel)sel.value=s.artistBg_align;}
 }
