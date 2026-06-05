@@ -338,36 +338,21 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
 
   <!-- 폰트 탭 -->
   <div class="panel" id="tab-fonts">
-    <!-- Adobe Fonts (Typekit) 섹션 -->
     <div class="sec">
       <h2>☁ Adobe Fonts (Typekit)</h2>
-      <div style="background:#0a0a1a;border:1px solid #3a2a5a;border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:10px;line-height:1.6;color:#cc99ff">
-        <b style="color:#bb77ff">🔗 Adobe Fonts 연결 방법</b><br>
-        <span style="color:#aaa">1. <a href="https://fonts.adobe.com/my_fonts" target="_blank" style="color:#bb77ff">fonts.adobe.com</a>에서 Kit ID 확인</span><br>
-        <span style="color:#aaa">2. 아래에 Typekit 스크립트 코드 붙여넣기</span><br>
-        <span style="color:#aaa">3. 적용할 폰트 패밀리명 추가</span><br>
-        <span style="color:#cc99ff;font-size:9px">✅ 편집기 미리보기 + 결과물 HTML 모두 적용됨</span>
+      <div style="background:#0a0a1a;border:1px solid #2a2a4a;border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:10px;line-height:1.6;color:#88aaff">
+        <b style="color:#aaaaff">Kit ID 입력 방법</b><br>
+        <span style="color:#aaa">fonts.adobe.com → Web Projects → Kit ID (7자리)</span><br>
+        <span style="color:#aaa">Kit의 CSS 패밀리명을 아래 폰트 등록에서 패밀리명으로 입력</span>
       </div>
-      <div style="margin-bottom:6px">
-        <label style="font-size:9px;color:#bb77ff;display:block;margin-bottom:3px">Typekit 스크립트 코드 붙여넣기</label>
-        <textarea id="typekitScript" rows="5" placeholder="&lt;script&gt;&#10;  (function(d) {&#10;    var config = { kitId: 'xxxxxxx', ... }&#10;  })(document);&#10;&lt;/script&gt;" oninput="onTypekitPaste()" style="width:100%;padding:6px 8px;border-radius:4px;border:1px solid #3a2a5a;background:#0a0a1a;color:#cc99ff;font-size:9px;font-family:monospace;resize:vertical;outline:none;line-height:1.5"></textarea>
+      <div style="display:flex;gap:6px;align-items:center">
+        <input id="adobeKitId" type="text" placeholder="Kit ID (예: esw2jrb)" style="flex:1;padding:5px 8px;background:#0f0f2a;border:1px solid #3a3a6a;border-radius:4px;color:#eee;font-size:11px;outline:none">
+        <button class="btn-sm" onclick="applyAdobeKit()" style="background:#5555dd;white-space:nowrap">▶ 적용</button>
       </div>
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">
-        <span style="font-size:9px;color:#888">Kit ID:</span>
-        <input type="text" id="typekitKitId" placeholder="kzr2fcb" oninput="onTypekitKitIdChange()" style="flex:1;padding:4px 6px;border-radius:3px;border:1px solid #3a2a5a;background:#0f0f2a;color:#cc99ff;font-size:10px;font-family:monospace;outline:none">
-        <button class="btn-sm" style="background:#3a1a5a;border-color:#6a3aaa;color:#cc99ff" onclick="applyTypekitNow()">▶ 적용</button>
-      </div>
-      <div id="typekitStatus" style="font-size:9px;color:#888;margin-bottom:6px;min-height:14px"></div>
-      <!-- 폰트 패밀리명 목록 -->
-      <div style="margin-bottom:4px">
-        <label style="font-size:9px;color:#bb77ff;display:block;margin-bottom:3px">Adobe Fonts 패밀리명 (폰트 선택에 추가됨)</label>
-        <div id="adobeFontList"></div>
-        <button class="btn-sm" style="margin-top:5px;background:#1a0a2a;border-color:#3a2a5a;color:#bb77ff" onclick="addAdobeFontName()">+ 패밀리명 추가</button>
-      </div>
+      <div id="adobeKitStatus" style="font-size:10px;color:#888;margin-top:4px"></div>
     </div>
-    <!-- 로컬 폰트 파일 섹션 -->
     <div class="sec">
-      <h2>✍ 로컬 폰트 파일 등록</h2>
+      <h2>✍ 폰트 등록</h2>
       <div style="background:#0a1a0a;border:1px solid #2a4a2a;border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:10px;line-height:1.6;color:#88cc88">
         <b style="color:#44ff88">📁 폰트 등록 방법</b><br>
         <span style="color:#aaa">아래 📁 버튼으로 폰트 파일 업로드 (.ttf / .otf / .woff / .woff2)</span><br>
@@ -417,7 +402,8 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
 <div class="right">
   <div class="rhdr">
     <h2>📋 완성 HTML</h2>
-    <button onclick="generate()" style="padding:4px 40px;background:#e94560;border:none;border-radius:4px;color:#fff;cursor:pointer;font-size:10px;font-weight:bold;">⚙️ Config 생성</button>
+    <button onclick="generate(false)" style="padding:4px 12px;background:#e94560;border:none;border-radius:4px;color:#fff;cursor:pointer;font-size:10px;font-weight:bold;">⚙️ 생성 (base64)</button>
+    <button onclick="generate(true)" style="padding:4px 12px;background:#1a8a4a;border:none;border-radius:4px;color:#fff;cursor:pointer;font-size:10px;font-weight:bold;">📂 생성 (font/폴더)</button>
     <button class="btn-copy" onclick="copyOut()">복사</button>
   </div>
   <textarea id="outputCode" readonly placeholder="Config 생성을 클릭하세요..."></textarea>
@@ -464,72 +450,6 @@ let otherAssign=Object.fromEntries(OTHER_DEFS.map(r=>[r.id,null]));
 let editTarget=null;
 let fontEntries=[];
 let sampleImg=null;
-let adobeFontNames=[]; // Adobe Fonts 패밀리명 목록
-
-// ── Adobe Fonts (Typekit) 관련 함수 ──────────────────────────────
-function onTypekitPaste(){
-  const raw=(document.getElementById('typekitScript')?.value||'').trim();
-  // kitId 추출
-  const m=raw.match(/kitId\s*[:=]\s*['"]([a-zA-Z0-9]+)['"]/);
-  if(m){
-    document.getElementById('typekitKitId').value=m[1];
-    setTypekitStatus('Kit ID 감지됨: '+m[1]+' — ▶ 적용 버튼을 눌러 로드하세요','#bb77ff');
-  }
-  scheduleAutoSave();
-}
-function onTypekitKitIdChange(){scheduleAutoSave();}
-function setTypekitStatus(msg,color='#888'){const el=document.getElementById('typekitStatus');if(el){el.textContent=msg;el.style.color=color;}}
-
-function applyTypekitNow(){
-  const kitId=(document.getElementById('typekitKitId')?.value||'').trim();
-  if(!kitId){setTypekitStatus('Kit ID를 입력하세요','#e94560');return;}
-  document.querySelectorAll('.typekit-injected').forEach(el=>el.remove());
-  setTypekitStatus('로딩 중...','#bb77ff');
-  // CSS 방식으로 로드 (script 방식은 CSP로 차단되는 환경이 많음)
-  const link=document.createElement('link');
-  link.rel='stylesheet';
-  link.className='typekit-injected';
-  link.href='https://use.typekit.net/'+kitId+'.css';
-  link.onload=()=>{
-    setTypekitStatus('✅ Adobe Fonts 로드 완료 (Kit: '+kitId+')','#44dd88');
-    setTimeout(()=>{refreshFontDropdowns();injectAndLoadFonts().then(()=>redraw());},800);
-  };
-  link.onerror=()=>{
-    setTypekitStatus('⚠️ 이 환경에서 미리보기 차단됨 — 결과물 HTML엔 정상 삽입됩니다. 다운로드 후 로컬에서 확인하세요','#ffaa44');
-    refreshFontDropdowns();
-  };
-  document.head.appendChild(link);
-  scheduleAutoSave();
-}
-
-let adobeFontIdSeq=0;
-function addAdobeFontName(name=''){
-  const idx=adobeFontIdSeq++;
-  const list=document.getElementById('adobeFontList');
-  const div=document.createElement('div');
-  div.id='af_'+idx;
-  div.style.cssText='display:flex;align-items:center;gap:5px;margin-bottom:4px';
-  div.innerHTML='<input type="text" value="'+(name||'')+'" placeholder="폰트 패밀리명 (예: source-han-sans-cjk-ko)" oninput="onAdobeFontNameChange()" style="flex:1;padding:4px 6px;border-radius:3px;border:1px solid #3a2a5a;background:#0f0f2a;color:#cc99ff;font-size:10px;outline:none">'+
-    '<button class="btn-sm" style="background:#2a0a1a;border-color:#5a2a3a;color:#e94560" onclick="removeAdobeFontEntry(\'af_'+idx+'\')">✕</button>';
-  list.appendChild(div);
-  refreshAdobeFontNames();
-  scheduleAutoSave();
-}
-function removeAdobeFontEntry(id){document.getElementById(id)?.remove();refreshAdobeFontNames();scheduleAutoSave();}
-function onAdobeFontNameChange(){refreshAdobeFontNames();scheduleAutoSave();}
-function refreshAdobeFontNames(){
-  adobeFontNames=[];
-  document.querySelectorAll('#adobeFontList input[type=text]').forEach(inp=>{const v=inp.value.trim();if(v)adobeFontNames.push(v);});
-  refreshFontDropdowns();
-}
-function getAdobeFontEntries(){
-  const names=[];
-  document.querySelectorAll('#adobeFontList input[type=text]').forEach(inp=>{const v=inp.value.trim();if(v)names.push(v);});
-  return names;
-}
-function getTypekitKitId(){return(document.getElementById('typekitKitId')?.value||'').trim();}
-function getTypekitScriptRaw(){return(document.getElementById('typekitScript')?.value||'').trim();}
-// ────────────────────────────────────────────────────────────────
 
 function showPresetMsg(msg,color='#aaa'){const el=document.getElementById('presetMsg');el.textContent=msg;el.style.color=color;clearTimeout(el._t);el._t=setTimeout(()=>el.textContent='',2500);}
 
@@ -631,11 +551,13 @@ function addFontEntry(data={}){
     '<button class="dclr" onclick="removeFontEntry('+idx+')">✕</button></div>'+
     '<div style="margin-bottom:6px"><textarea id="fe_'+idx+'_paste" rows="3" placeholder="@font-face { ... } 코드 붙여넣기" oninput="onFontPaste('+idx+')" style="width:100%;padding:5px 7px;border-radius:4px;border:1px solid #2a2a4a;background:#0a0a1a;color:#aaa;font-size:9px;font-family:monospace;resize:vertical;outline:none;line-height:1.5"></textarea></div>'+
     '<div style="margin-bottom:6px">'+
-    '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:6px 8px;background:#0f3460;border:1px dashed #2a2a4a;border-radius:4px;" onclick="document.getElementById(\'fe_'+idx+'_file\').click()">'+
-    '<span style="font-size:10px;color:#aaa">📁 woff/woff2 파일 업로드</span>'+
-    '<span id="fe_'+idx+'_filelabel" style="font-size:9px;color:#666;margin-left:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:120px;"></span>'+
-    '</label>'+
+    '<button class="btn-sm" style="width:100%;background:#0f3460;border:1px dashed #2a2a4a;margin-bottom:4px" onclick="document.getElementById(\'fe_'+idx+'_file\').click()">📁 파일 업로드 (base64 내장)</button>'+
     '<input type="file" id="fe_'+idx+'_file" accept=".woff,.woff2,.ttf,.otf" style="display:none" onchange="onFontFileUpload('+idx+',event)">'+
+    '<div style="display:flex;align-items:center;gap:4px;margin-top:4px">'+
+    '<span style="font-size:10px;color:#aaa;white-space:nowrap">📂 font/</span>'+
+    '<input type="text" id="fe_'+idx+'_filename" value="'+(data.filename||'')+'" placeholder="파일명 (예: myfont.woff2)" oninput="onFontFilenameInput('+idx+')" style="flex:1;padding:4px 6px;border-radius:4px;border:1px solid #2a3a5a;background:#0a0a1a;color:#eee;font-size:10px;outline:none">'+
+    '</div>'+
+    '<div id="fe_'+idx+'_srclabel" style="font-size:9px;color:#666;margin-top:2px"></div>'+
     '</div>'+
     '<div class="ts-field"><label>family</label><input type="text" id="fe_'+idx+'_family" value="'+(data.family||'')+'" placeholder="FontName" oninput="refreshFontDropdowns();scheduleAutoSave()"></div>'+
     '<div class="ts-field" style="display:none"><label>src</label><input type="text" id="fe_'+idx+'_src" value="'+(data.src||'')+'" oninput="scheduleAutoSave()"></div>'+
@@ -643,7 +565,9 @@ function addFontEntry(data={}){
     '<div class="ts-field"><label>weight</label><input type="text" id="fe_'+idx+'_weight" value="'+(data.weight||'normal')+'" oninput="scheduleAutoSave()"></div>'+
     '<div class="ts-field" style="display:none"><label>display</label><input type="text" id="fe_'+idx+'_display" value="'+(data.display||'swap')+'" oninput="scheduleAutoSave()"></div>'+
     '</div>');
-  if(data.src&&data.src.startsWith('data:'))document.getElementById('fe_'+idx+'_filelabel').textContent='(업로드됨)';
+  const _lbl=document.getElementById('fe_'+idx+'_srclabel');
+  if(data.src&&data.src.startsWith('data:')){if(_lbl)_lbl.textContent='✅ base64 내장됨';}
+  else if(data.filename){if(_lbl)_lbl.textContent='✅ font/'+data.filename;}
   refreshFontDropdowns();scheduleAutoSave();
 }
 function onFontFileUpload(idx, event){
@@ -659,7 +583,7 @@ function onFontFileUpload(idx, event){
     const base64=e.target.result;
     document.getElementById('fe_'+idx+'_src').value=base64;
     document.getElementById('fe_'+idx+'_fmt').value=fmt;
-    document.getElementById('fe_'+idx+'_filelabel').textContent=file.name;
+    const _sl=document.getElementById('fe_'+idx+'_srclabel');if(_sl)_sl.textContent='✅ base64 내장됨 ('+file.name+')';
     if(!document.getElementById('fe_'+idx+'_family').value){
       const guessed=file.name.replace(/\.(woff2?|ttf|otf)$/i,'').replace(/[-_]/g,' ');
       document.getElementById('fe_'+idx+'_family').value=guessed;
@@ -671,39 +595,23 @@ function onFontFileUpload(idx, event){
   reader.readAsDataURL(file);
 }
 
+function onFontFilenameInput(idx){
+  const val=(document.getElementById('fe_'+idx+'_filename')?.value||'').trim();
+  const lbl=document.getElementById('fe_'+idx+'_srclabel');
+  if(val){
+    document.getElementById('fe_'+idx+'_src').value='';
+    const ext=val.split('.').pop().toLowerCase();
+    const fmtMap={woff:'woff',woff2:'woff2',ttf:'truetype',otf:'opentype'};
+    document.getElementById('fe_'+idx+'_fmt').value=fmtMap[ext]||ext;
+    if(lbl)lbl.textContent='✅ font/'+val;
+  }else{if(lbl)lbl.textContent='';}
+  scheduleAutoSave();
+}
 function onFontPaste(idx){const code=document.getElementById('fe_'+idx+'_paste')?.value||'';if(!code.includes('@font-face'))return;const{family,src,fmt,weight,display}=parseFontFace(code);if(family)document.getElementById('fe_'+idx+'_family').value=family;if(src)document.getElementById('fe_'+idx+'_src').value=src;if(fmt)document.getElementById('fe_'+idx+'_fmt').value=fmt;if(weight)document.getElementById('fe_'+idx+'_weight').value=weight;if(display)document.getElementById('fe_'+idx+'_display').value=display;refreshFontDropdowns();scheduleAutoSave();}
 function removeFontEntry(idx){document.getElementById('fe_'+idx)?.remove();fontEntries[idx]=null;refreshFontDropdowns();scheduleAutoSave();}
-function getFontEntries(){return fontEntries.map((_,idx)=>{const el=document.getElementById('fe_'+idx);if(!el)return null;return{family:document.getElementById('fe_'+idx+'_family')?.value.trim()||'',src:document.getElementById('fe_'+idx+'_src')?.value.trim()||'',fmt:document.getElementById('fe_'+idx+'_fmt')?.value.trim()||'woff2',weight:document.getElementById('fe_'+idx+'_weight')?.value.trim()||'normal',display:document.getElementById('fe_'+idx+'_display')?.value.trim()||'swap'};}).filter(f=>f&&f.family&&f.src);}
-function getRegisteredFonts(){
-  const names=[];
-  // 로컬 파일 폰트
-  fontEntries.forEach((_,idx)=>{const el=document.getElementById('fe_'+idx);if(!el)return;const v=document.getElementById('fe_'+idx+'_family')?.value.trim();if(v&&!names.includes(v))names.push(v);});
-  // Adobe Fonts (Typekit) 이름 — 구분자로 표시
-  const adobeNames=getAdobeFontEntries();
-  adobeNames.forEach(v=>{if(v&&!names.includes(v))names.push(v);});
-  return names;
-}
-function refreshFontDropdowns(){
-  const fonts=getRegisteredFonts();
-  const localFonts=fontEntries.map((_,idx)=>{const el=document.getElementById('fe_'+idx);if(!el)return null;return document.getElementById('fe_'+idx+'_family')?.value.trim()||null;}).filter(Boolean);
-  const adobeFonts=getAdobeFontEntries();
-  TS_DEFS.forEach(ts=>{
-    const sel=document.getElementById('ts_'+ts.id+'_font_sel'),txt=document.getElementById('ts_'+ts.id+'_font');
-    if(!sel||!txt)return;
-    const cur=txt.value;
-    let html='<option value="">-- 직접입력 --</option>';
-    if(localFonts.length){html+='<optgroup label="📁 로컬 파일">'+localFonts.map(f=>'<option value="'+f+'"'+(cur===f?' selected':'')+'>'+f+'</option>').join('')+'</optgroup>';}
-    if(adobeFonts.length){html+='<optgroup label="☁ Adobe Fonts">'+adobeFonts.map(f=>'<option value="'+f+'"'+(cur===f?' selected':'')+'>'+f+'</option>').join('')+'</optgroup>';}
-    sel.innerHTML=html;
-    const subSel=document.getElementById('ts_'+ts.id+'_subFont');
-    if(!subSel)return;
-    const curSub=subSel.value;
-    let subHtml='<option value="">-- 미지정 (반응없음) --</option>';
-    if(localFonts.length){subHtml+='<optgroup label="📁 로컬 파일">'+localFonts.map(f=>'<option value="'+f+'"'+(curSub===f?' selected':'')+'>'+f+'</option>').join('')+'</optgroup>';}
-    if(adobeFonts.length){subHtml+='<optgroup label="☁ Adobe Fonts">'+adobeFonts.map(f=>'<option value="'+f+'"'+(curSub===f?' selected':'')+'>'+f+'</option>').join('')+'</optgroup>';}
-    subSel.innerHTML=subHtml;
-  });
-}
+function getFontEntries(){return fontEntries.map((_,idx)=>{const el=document.getElementById('fe_'+idx);if(!el)return null;const filename=(document.getElementById('fe_'+idx+'_filename')?.value||'').trim();const src=document.getElementById('fe_'+idx+'_src')?.value.trim()||'';const effectiveSrc=src||(filename?('font/'+filename):'');return{family:document.getElementById('fe_'+idx+'_family')?.value.trim()||'',src:effectiveSrc,filename:filename,fmt:document.getElementById('fe_'+idx+'_fmt')?.value.trim()||'woff2',weight:document.getElementById('fe_'+idx+'_weight')?.value.trim()||'normal',display:document.getElementById('fe_'+idx+'_display')?.value.trim()||'swap'};}).filter(f=>f&&f.family&&f.src);}
+function getRegisteredFonts(){const names=[];fontEntries.forEach((_,idx)=>{const el=document.getElementById('fe_'+idx);if(!el)return;const v=document.getElementById('fe_'+idx+'_family')?.value.trim();if(v&&!names.includes(v))names.push(v);});return names;}
+function refreshFontDropdowns(){const fonts=getRegisteredFonts();TS_DEFS.forEach(ts=>{const sel=document.getElementById('ts_'+ts.id+'_font_sel'),txt=document.getElementById('ts_'+ts.id+'_font');if(!sel||!txt)return;const cur=txt.value;sel.innerHTML='<option value="">-- 직접입력 --</option>'+fonts.map(f=>'<option value="'+f+'"'+(cur===f?' selected':'')+'>'+f+'</option>').join('');const subSel=document.getElementById('ts_'+ts.id+'_subFont');if(!subSel)return;const curSub=subSel.value;subSel.innerHTML='<option value="">-- 미지정 (반응없음) --</option>'+fonts.map(f=>'<option value="'+f+'"'+(curSub===f?' selected':'')+'>'+f+'</option>').join('');});}
 
 document.getElementById('fi').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;imgEl=new Image();imgEl.onload=()=>{imgW=imgEl.width;imgH=imgEl.height;document.getElementById('uploadLabel').textContent='✅ '+f.name+' ('+imgW+'×'+imgH+')';fitCanvas();redraw();cachePixels();};imgEl.src=URL.createObjectURL(f);});
 function cachePixels(){const off=document.createElement('canvas');off.width=imgW;off.height=imgH;const oc=off.getContext('2d');oc.drawImage(imgEl,0,0);pixelData=oc.getImageData(0,0,imgW,imgH).data;}
@@ -805,14 +713,22 @@ function redraw(){
       ctx.font=nStyle.weight+' '+px+'px "'+nStyle.font+'"';ctx.textBaseline='middle';
       const nameW=ctx.measureText(S_ART).width;
       const boxW=nameW+padX*2*sx,boxH=(px+padY*2*sy);
-      const boxX=acx*sx-boxW,boxY=acy*sy-boxH;
-      drawPText(ctx,S_ART,boxX+boxW-padX*sx,boxY+boxH/2+2*sy,Object.assign({},nStyle,{align:'left'}),sf);
+      let boxX;
+      if(nStyle.align==='left')boxX=acx*sx;
+      else if(nStyle.align==='center')boxX=acx*sx-boxW/2;
+      else boxX=acx*sx-boxW;
+      const boxY=acy*sy-boxH;
+      let _tx;
+      if(nStyle.align==='left')_tx=boxX+padX*sx;
+      else if(nStyle.align==='center')_tx=boxX+boxW/2;
+      else _tx=boxX+boxW-padX*sx;
+      drawPText(ctx,S_ART,_tx,boxY+boxH/2+2*sy,Object.assign({},nStyle,{align:'left'}),sf);
     }
   }
   if(document.getElementById('showSampleOverlay')?.checked&&sampleImg){const opacity=parseFloat(document.getElementById('sampleOpacitySlider')?.value||0.5);ctx.save();ctx.globalAlpha=opacity;ctx.drawImage(sampleImg,0,0,c.width,c.height);ctx.restore();}
 }
 
-function generate(){
+function generate(useFolder=false){
   const textStyles={};
   TS_DEFS.forEach(ts=>{
     const obj={font:gs('ts_'+ts.id+'_font')||ts.font,size:(gs('ts_'+ts.id+'_size')||String(parseInt(ts.size)||30))+'px',color:gs('ts_'+ts.id+'_color')||ts.color,align:gs('ts_'+ts.id+'_align')||ts.align,weight:gs('ts_'+ts.id+'_weight')||ts.weight};
@@ -854,13 +770,22 @@ function generate(){
     artistBgUse,artistBgAlign,artistPadding,artistBgSlice,dayConfig
   };
   const fonts=getFontEntries();
-  const fontFaceBlock=fonts.map(f=>{
-    const mimeMatch=f.src.match(/data:([^;]+)/);
-    const mime=mimeMatch?mimeMatch[1]:'';
-    let fmt='truetype';
-    if(mime.includes('woff2'))fmt='woff2';
-    else if(mime.includes('woff'))fmt='woff';
-    else if(mime.includes('opentype')||mime.includes('otf'))fmt='opentype';
+  // useFolder 모드: base64 src를 font/파일명 경로로 대체
+  const fontsForBuild=useFolder?fonts.map(f=>{
+    if(f.filename)return Object.assign({},f,{src:'font/'+f.filename});
+    // base64인 경우 filename 추정 불가 → 그대로 유지 (경고)
+    return f;
+  }):fonts;
+  const fontFaceBlock=fontsForBuild.map(f=>{
+    let fmt=f.fmt||'woff2';
+    if(f.src.startsWith('data:')){
+      const mimeMatch=f.src.match(/data:([^;]+)/);
+      const mime=mimeMatch?mimeMatch[1]:'';
+      if(mime.includes('woff2'))fmt='woff2';
+      else if(mime.includes('woff'))fmt='woff';
+      else if(mime.includes('opentype')||mime.includes('otf'))fmt='opentype';
+      else fmt='truetype';
+    }
     return ['        @font-face {',
       "            font-family: '"+f.family+"';",
       "            src: url('"+f.src+"') format('"+fmt+"');",
@@ -870,18 +795,6 @@ function generate(){
       "        }"].join('\n');
   }).join('\n');
   const fontPreloadDivs=fonts.map(f=>"<div style=\"font-family: '"+f.family+"'; position: absolute; opacity: 0;\">.</div>").join('\n');
-  // Adobe Fonts (Typekit) 처리
-  const kitId=getTypekitKitId();
-  const typekitBlock=kitId?`<script>
-  (function(d) {
-    var config = {
-      kitId: '${kitId}',
-      scriptTimeout: 3000,
-      async: true
-    },
-    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\\bwf-loading\\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
-  })(document);
-<\/script>`:'';
   function toJsLiteral(obj,indent=0){
     const pad=' '.repeat(indent+4),closePad=' '.repeat(indent);
     if(obj===null)return'null';
@@ -891,6 +804,13 @@ function generate(){
     const entries=Object.entries(obj).map(([k,v])=>pad+k+': '+toJsLiteral(v,indent+4));
     return'{\n'+entries.join(',\n')+'\n'+closePad+'}';
   }
+  const adobeKitId=(document.getElementById('adobeKitId')?.value||'').trim();
+  const typekitScript=adobeKitId?`<script>
+  (function(d) {
+    var config = { kitId: '${adobeKitId}', scriptTimeout: 3000, async: true },
+    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='https://use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load({kitId:config.kitId,scriptTimeout:config.scriptTimeout,async:config.async,active:function(){document.fonts.ready.then(function(){if(typeof drawSchedule==='function')drawSchedule();});}});}catch(e){}};s.parentNode.insertBefore(tk,s)
+  })(document);
+<\/script>`:'';
   const configStr=toJsLiteral(config);
   const html=`<!DOCTYPE html>
 <html lang="ko">
@@ -898,7 +818,7 @@ function generate(){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>스케줄 메이커</title>
-${typekitBlock}
+\${typekitScript}
     <link href="https://fonts.googleapis.com/css2?family=Malgun+Gothic&display=swap" rel="stylesheet">
     <style>
 ${fontFaceBlock}
@@ -1164,14 +1084,14 @@ ${'<scr'+'ipt>'}
     function handleDateSelect(){const picker=document.getElementById('weekPicker');if(!picker.value){weekData={startMonth:"",startDate:"",endMonth:"",endDate:"",dayTexts:[]};drawSchedule();return;}const d=new Date(picker.value);const dow=d.getDay();if(dow!==1){d.setDate(d.getDate()+(dow===0?-6:1-dow));picker.value=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}weekData.startMonth=String(d.getMonth()+1).padStart(2,'0');weekData.startDate=String(d.getDate()).padStart(2,'0');const sun=new Date(d);sun.setDate(d.getDate()+6);weekData.endMonth=String(sun.getMonth()+1).padStart(2,'0');weekData.endDate=String(sun.getDate()).padStart(2,'0');weekData.dayTexts=Array.from({length:7},(_,i)=>{const t=new Date(d);t.setDate(d.getDate()+i);return String(t.getDate());});saveData();drawSchedule();}
     function toggleInputs(day){const on=document.getElementById(day+'_type').checked;document.getElementById(day).style.display=on?'block':'none';document.getElementById(day+'_sub').style.display=on?'block':'none';document.getElementById(day+'_platform').style.display=on?'block':'none';const ampmEl=document.getElementById(day+'_ampm');if(ampmEl)ampmEl.style.display=on?'block':'none';const timebtn=document.getElementById(day+'_timebtn');if(timebtn)timebtn.parentElement.style.display=on?'block':'none';const body=document.getElementById(day+'_offline').parentElement;if(body){const center=body.querySelector('.day-col-center');const right=body.querySelector('.day-col-right');if(center)center.style.display=on?'flex':'none';if(right)right.style.display=on?'flex':'none';}document.getElementById(day+'_offline').style.display=on?'none':'flex';drawSchedule();}
     function drawSingleText(context,text,x,y,style){const rad=style.rotate?style.rotate*Math.PI/180:0;if(rad){context.save();context.translate(x,y);context.rotate(rad);x=0;y=0;}context.font=style.weight+' '+style.size+' "'+style.font+'"';context.fillStyle=style.color;context.textAlign=style.align;if('letterSpacing'in context)context.letterSpacing=style.letterSpacing||"0px";if(style.strokeColor&&style.strokeWidth){context.strokeStyle=style.strokeColor;context.lineWidth=style.strokeWidth;context.lineJoin="round";context.strokeText(text,x,y);}context.fillText(text,x,y);if('letterSpacing'in context)context.letterSpacing="0px";if(rad)context.restore();}
-    function wrapText(context,text,x,y,maxWidth,style){const subFont=style.subFont||null;function parseSegments(raw){const segs=[];const firstJP=raw.indexOf('[JP]');if(firstJP>0)segs.push({t:raw.slice(0,firstJP),jp:false});else if(firstJP===-1){segs.push({t:raw,jp:false});return segs;}const parts=raw.slice(firstJP).split('[JP]').filter((_,i)=>i>0);parts.forEach(p=>segs.push({t:p,jp:true}));return segs;}const lineHeight=parseInt(style.size)*(style.lineHeight||1.4);const paragraphs=text.split('//').map(p=>p.trim());const allLines=[];function setFont(jp){const f=(jp&&subFont)?subFont:style.font;context.font=style.weight+' '+style.size+' "'+f+'"';}for(const para of paragraphs){const segs=parseSegments(para);const chars=[];segs.forEach(s=>{for(const ch of s.t)chars.push({ch,jp:s.jp&&!!subFont});});let lineChars=[],lineWidth=0;for(const c of chars){setFont(c.jp);const cw=context.measureText(c.ch).width;if(lineWidth+cw>maxWidth&&lineChars.length>0){allLines.push(lineChars);lineChars=[];lineWidth=0;}lineChars.push({...c,w:cw});lineWidth+=cw;}if(lineChars.length>0)allLines.push(lineChars);}const startY=y-((allLines.length-1)*lineHeight)/2;allLines.forEach((lineChars,li)=>{const ly=startY+li*lineHeight;const totalW=lineChars.reduce((s,c)=>s+c.w,0);let cx;if(style.align==='center')cx=x-totalW/2;else if(style.align==='right')cx=x-totalW;else cx=x;for(const c of lineChars){setFont(c.jp);context.fillStyle=style.color;context.textAlign='left';context.textBaseline='middle';if('letterSpacing'in context)context.letterSpacing=style.letterSpacing||'0px';if(style.strokeColor&&style.strokeWidth){context.strokeStyle=style.strokeColor;context.lineWidth=style.strokeWidth;context.lineJoin='round';context.strokeText(c.ch,cx,ly);}context.fillText(c.ch,cx,ly);cx+=c.w;}});if('letterSpacing'in context)context.letterSpacing='0px';context.textAlign=style.align;}
+    function wrapText(context,text,x,y,maxWidth,style){const lineHeight=parseInt(style.size)*(style.lineHeight||1.4);const paragraphs=text.split('//').map(p=>p.trim());const allLines=[];context.font=style.weight+' '+style.size+' "'+style.font+'"';if('letterSpacing'in context)context.letterSpacing=style.letterSpacing||'0px';for(const para of paragraphs){const chars=[...para];let line='';for(const ch of chars){const test=line+ch;if(context.measureText(test).width>maxWidth&&line.length>0){allLines.push(line);line=ch;}else{line=test;}}if(line.length>0)allLines.push(line);}const startY=y-((allLines.length-1)*lineHeight)/2;context.fillStyle=style.color;context.textBaseline='middle';if(style.shadow){const s=style.shadow;context.shadowColor=s.color||'rgba(0,0,0,0.4)';context.shadowBlur=s.blur||4;context.shadowOffsetX=s.x||0;context.shadowOffsetY=s.y||0;}allLines.forEach((line,li)=>{const ly=startY+li*lineHeight;const tw=context.measureText(line).width;let cx;if(style.align==='center')cx=x-tw/2;else if(style.align==='right')cx=x-tw;else cx=x;context.textAlign='left';if(style.strokeColor&&style.strokeWidth){context.strokeStyle=style.strokeColor;context.lineWidth=style.strokeWidth;context.lineJoin='round';context.strokeText(line,cx,ly);}context.fillText(line,cx,ly);});context.shadowColor='transparent';context.shadowBlur=0;context.shadowOffsetX=0;context.shadowOffsetY=0;if('letterSpacing'in context)context.letterSpacing='0px';context.textAlign=style.align||'left';}
     function draw3SliceHorizontal(ctx,img,x,y,w,h,leftSlice,rightSlice){if(!img||!img.width)return;const sw2=img.width-leftSlice-rightSlice;const dw2=Math.ceil(w)-leftSlice-rightSlice;if(sw2<0||dw2<0)return;const dx=Math.floor(x),dy=Math.floor(y),dh=Math.ceil(h);ctx.drawImage(img,0,0,leftSlice,img.height,dx,dy,leftSlice,dh);ctx.drawImage(img,leftSlice,0,sw2,img.height,dx+leftSlice-0.5,dy,dw2+1,dh);ctx.drawImage(img,leftSlice+sw2,0,rightSlice,img.height,dx+leftSlice+dw2,dy,rightSlice,dh);}
-    async function drawSchedule(){if(isDrawing){needsRedraw=true;return;}isDrawing=true;try{const[mainBg,iconChzzk,iconYoutube,iconTwitch,iconSoop,artistBgImg]=await Promise.all([getCachedImage(config.imgSrc),getCachedImage(config.platforms.chzzk),getCachedImage(config.platforms.youtube),getCachedImage(config.platforms.twitch),getCachedImage(config.platforms.soop),getCachedImage(config.artistBgImage)]);ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);if(uploadedIllust){const w=uploadedIllust.width*imgState.scale;const h=uploadedIllust.height*imgState.scale;const cx=imgState.x+w/2;const cy=imgState.y+h/2;ctx.save();ctx.translate(cx,cy);if(imgState.rotate)ctx.rotate(imgState.rotate*Math.PI/180);ctx.scale(imgState.flipH?-1:1,imgState.flipV?-1:1);ctx.drawImage(uploadedIllust,-w/2,-h/2,w,h);ctx.restore();}if(!mainBg){ctx.fillStyle="#333333";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#ff6b6b";ctx.font="bold 50px 'Malgun Gothic'";ctx.textAlign="center";ctx.fillText("배경 이미지(image/bg.png)를 찾을 수 없습니다!",canvas.width/2,canvas.height/2-50);}else{ctx.drawImage(mainBg,0,0,canvas.width,canvas.height);}if(weekData.startMonth){const tc=config.topDateCoords;ctx.textBaseline="middle";drawSingleText(ctx,weekData.startMonth,tc.startMonth[0],tc.startMonth[1],config.textStyles.topMonth);drawSingleText(ctx,weekData.endMonth,tc.endMonth[0],tc.endMonth[1],config.textStyles.topMonth);drawSingleText(ctx,weekData.startDate,tc.startDate[0],tc.startDate[1],config.textStyles.topDay);drawSingleText(ctx,weekData.endDate,tc.endDate[0],tc.endDate[1],config.textStyles.topDay);const startText=weekData.startMonth+'.'+weekData.startDate;const endText=weekData.endMonth+'.'+weekData.endDate;if(config.dateRangeStartCoords){const[sx,sy]=config.dateRangeStartCoords;drawSingleText(ctx,startText,sx,sy,config.textStyles.dateRangeStart||{});}if(config.dateRangeEndCoords){const[ex,ey]=config.dateRangeEndCoords;drawSingleText(ctx,endText,ex,ey,config.textStyles.dateRangeEnd||{});}}const iconMap={chzzk:iconChzzk,youtube:iconYoutube,twitch:iconTwitch,soop:iconSoop};ctx.textBaseline="middle";for(const[i,day]of['mon','tue','wed','thu','fri','sat','sun'].entries()){const dc=config.dayConfig[day];if(!dc)continue;const[boxX,boxY]=dc.boxCoords;const[boxW,boxH]=dc.boxSize;const isOnline=document.getElementById(day+'_type').checked;const boxImg=await getCachedImage(isOnline?dc.boxOn:dc.boxOff);if(boxImg){ctx.drawImage(boxImg,boxX,boxY,boxW,boxH);}else{ctx.fillStyle=isOnline?'#bbdefb':'#fff9c4';ctx.globalAlpha=0.8;ctx.fillRect(boxX,boxY,boxW,boxH);ctx.globalAlpha=1.0;}if(weekData.dayTexts[i]){const dateStyle=isOnline?(config.textStyles.dayDateOn||config.textStyles.dayDate):(config.textStyles.dayDateOff||config.textStyles.dayDate);const dateCoords=isOnline?config.innerCoords.dateOn:config.innerCoords.dateOff;drawSingleText(ctx,weekData.dayTexts[i],boxX+dateCoords[0],boxY+dateCoords[1],dateStyle);}if(isOnline){const main=document.getElementById(day).value;if(main)wrapText(ctx,main,boxX+config.innerCoords.title[0],boxY+config.innerCoords.title[1],config.textMaxWidth,config.textStyles.mainTitle);const sub=document.getElementById(day+'_sub').value;if(sub)wrapText(ctx,sub,boxX+config.innerCoords.sub[0],boxY+config.innerCoords.sub[1],config.textMaxWidth,config.textStyles.subTitle);const time=document.getElementById(day+'_time').value;if(time)drawSingleText(ctx,time,boxX+config.innerCoords.time[0],boxY+config.innerCoords.time[1],config.textStyles.time);const icon=iconMap[document.getElementById(day+'_platform').value];if(icon)ctx.drawImage(icon,boxX+config.innerCoords.icon[0],boxY+config.innerCoords.icon[1],config.iconSize[0],config.iconSize[1]);const dayAmPm=document.getElementById(day+'_ampm')?.value||'AM';if(config.innerCoords.amPm&&(config.innerCoords.amPm[0]||config.innerCoords.amPm[1])){drawSingleText(ctx,dayAmPm,boxX+config.innerCoords.amPm[0],boxY+config.innerCoords.amPm[1],config.textStyles.amPm||config.textStyles.time);}}}const artistName=document.getElementById('artistName').value;if(artistName){ctx.textBaseline="middle";drawSingleText(ctx,"ART BY",config.artistLabelCoords[0],config.artistLabelCoords[1],config.textStyles.artistLabel);const nStyle=config.textStyles.artist;ctx.font=nStyle.weight+' '+nStyle.size+' "'+nStyle.font+'"';if('letterSpacing'in ctx)ctx.letterSpacing=nStyle.letterSpacing||"0px";const nameW=ctx.measureText(artistName).width;const boxW=nameW+config.artistPadding[0]*2;const boxH=parseInt(nStyle.size)+config.artistPadding[1]*2;const boxX=config.artistCoords[0]-boxW;const boxY=config.artistCoords[1]-boxH;if(artistBgImg){draw3SliceHorizontal(ctx,artistBgImg,boxX,boxY,boxW,boxH,config.artistBgSlice[0],config.artistBgSlice[1]);}drawSingleText(ctx,artistName,boxX+boxW-config.artistPadding[0],boxY+boxH/2+2,nStyle);if('letterSpacing'in ctx)ctx.letterSpacing="0px";}}finally{isDrawing=false;if(needsRedraw){needsRedraw=false;drawSchedule();}}}
+    async function drawSchedule(){if(isDrawing){needsRedraw=true;return;}isDrawing=true;try{const[mainBg,iconChzzk,iconYoutube,iconTwitch,iconSoop,artistBgImg]=await Promise.all([getCachedImage(config.imgSrc),getCachedImage(config.platforms.chzzk),getCachedImage(config.platforms.youtube),getCachedImage(config.platforms.twitch),getCachedImage(config.platforms.soop),getCachedImage(config.artistBgImage)]);ctx.fillStyle="#ffffff";ctx.fillRect(0,0,canvas.width,canvas.height);if(uploadedIllust){const w=uploadedIllust.width*imgState.scale;const h=uploadedIllust.height*imgState.scale;const cx=imgState.x+w/2;const cy=imgState.y+h/2;ctx.save();ctx.translate(cx,cy);if(imgState.rotate)ctx.rotate(imgState.rotate*Math.PI/180);ctx.scale(imgState.flipH?-1:1,imgState.flipV?-1:1);ctx.drawImage(uploadedIllust,-w/2,-h/2,w,h);ctx.restore();}if(!mainBg){ctx.fillStyle="#333333";ctx.fillRect(0,0,canvas.width,canvas.height);ctx.fillStyle="#ff6b6b";ctx.font="bold 50px 'Malgun Gothic'";ctx.textAlign="center";ctx.fillText("배경 이미지(image/bg.png)를 찾을 수 없습니다!",canvas.width/2,canvas.height/2-50);}else{ctx.drawImage(mainBg,0,0,canvas.width,canvas.height);}if(weekData.startMonth){const tc=config.topDateCoords;ctx.textBaseline="middle";drawSingleText(ctx,weekData.startMonth,tc.startMonth[0],tc.startMonth[1],config.textStyles.topMonth);drawSingleText(ctx,weekData.endMonth,tc.endMonth[0],tc.endMonth[1],config.textStyles.topMonth);drawSingleText(ctx,weekData.startDate,tc.startDate[0],tc.startDate[1],config.textStyles.topDay);drawSingleText(ctx,weekData.endDate,tc.endDate[0],tc.endDate[1],config.textStyles.topDay);const startText=weekData.startMonth+'.'+weekData.startDate;const endText=weekData.endMonth+'.'+weekData.endDate;if(config.dateRangeStartCoords){const[sx,sy]=config.dateRangeStartCoords;drawSingleText(ctx,startText,sx,sy,config.textStyles.dateRangeStart||{});}if(config.dateRangeEndCoords){const[ex,ey]=config.dateRangeEndCoords;drawSingleText(ctx,endText,ex,ey,config.textStyles.dateRangeEnd||{});}}const iconMap={chzzk:iconChzzk,youtube:iconYoutube,twitch:iconTwitch,soop:iconSoop};ctx.textBaseline="middle";for(const[i,day]of['mon','tue','wed','thu','fri','sat','sun'].entries()){const dc=config.dayConfig[day];if(!dc)continue;const[boxX,boxY]=dc.boxCoords;const[boxW,boxH]=dc.boxSize;const isOnline=document.getElementById(day+'_type').checked;const boxImg=await getCachedImage(isOnline?dc.boxOn:dc.boxOff);if(boxImg){ctx.drawImage(boxImg,boxX,boxY,boxW,boxH);}else{ctx.fillStyle=isOnline?'#bbdefb':'#fff9c4';ctx.globalAlpha=0.8;ctx.fillRect(boxX,boxY,boxW,boxH);ctx.globalAlpha=1.0;}if(weekData.dayTexts[i]){const dateStyle=isOnline?(config.textStyles.dayDateOn||config.textStyles.dayDate):(config.textStyles.dayDateOff||config.textStyles.dayDate);const dateCoords=isOnline?config.innerCoords.dateOn:config.innerCoords.dateOff;drawSingleText(ctx,weekData.dayTexts[i],boxX+dateCoords[0],boxY+dateCoords[1],dateStyle);}if(isOnline){const main=document.getElementById(day).value;if(main)wrapText(ctx,main,boxX+config.innerCoords.title[0],boxY+config.innerCoords.title[1],config.textMaxWidth,config.textStyles.mainTitle);const sub=document.getElementById(day+'_sub').value;if(sub)wrapText(ctx,sub,boxX+config.innerCoords.sub[0],boxY+config.innerCoords.sub[1],config.textMaxWidth,config.textStyles.subTitle);const time=document.getElementById(day+'_time').value;if(time)drawSingleText(ctx,time,boxX+config.innerCoords.time[0],boxY+config.innerCoords.time[1],config.textStyles.time);const icon=iconMap[document.getElementById(day+'_platform').value];if(icon)ctx.drawImage(icon,boxX+config.innerCoords.icon[0],boxY+config.innerCoords.icon[1],config.iconSize[0],config.iconSize[1]);const dayAmPm=document.getElementById(day+'_ampm')?.value||'AM';if(config.innerCoords.amPm&&(config.innerCoords.amPm[0]||config.innerCoords.amPm[1])){drawSingleText(ctx,dayAmPm,boxX+config.innerCoords.amPm[0],boxY+config.innerCoords.amPm[1],config.textStyles.amPm||config.textStyles.time);}}}const artistName=document.getElementById('artistName').value;if(artistName){ctx.textBaseline="middle";drawSingleText(ctx,"ART BY",config.artistLabelCoords[0],config.artistLabelCoords[1],config.textStyles.artistLabel);const nStyle=config.textStyles.artist;ctx.font=nStyle.weight+' '+nStyle.size+' "'+nStyle.font+'"';if('letterSpacing'in ctx)ctx.letterSpacing=nStyle.letterSpacing||"0px";const nameW=ctx.measureText(artistName).width;const boxW=nameW+config.artistPadding[0]*2;const boxH=parseInt(nStyle.size)+config.artistPadding[1]*2;const _ac=config.artistCoords;let boxX;if(nStyle.align==='left')boxX=_ac[0];else if(nStyle.align==='center')boxX=_ac[0]-boxW/2;else boxX=_ac[0]-boxW;const boxY=_ac[1]-boxH;if(artistBgImg){draw3SliceHorizontal(ctx,artistBgImg,boxX,boxY,boxW,boxH,config.artistBgSlice[0],config.artistBgSlice[1]);}let _tx;if(nStyle.align==='left')_tx=boxX+config.artistPadding[0];else if(nStyle.align==='center')_tx=boxX+boxW/2;else _tx=boxX+boxW-config.artistPadding[0];drawSingleText(ctx,artistName,_tx,boxY+boxH/2+2,nStyle);if('letterSpacing'in ctx)ctx.letterSpacing="0px";}}finally{isDrawing=false;if(needsRedraw){needsRedraw=false;drawSchedule();}}}
     function saveData(showAlert=false){const data={};document.querySelectorAll('.sched-input,.sched-select').forEach(el=>{data[el.id]=el.value;});document.querySelectorAll('.sched-toggle').forEach(chk=>{data[chk.id]=chk.checked;});data.illust=illustBase64;data.imgState=imgState;try{localStorage.setItem('scheduleDataFinal',JSON.stringify(data));}catch{data.illust=null;localStorage.setItem('scheduleDataFinal',JSON.stringify(data));if(showAlert)alert("첨부된 이미지 용량이 커서 브라우저에 임시 저장할 수 없습니다.");}}
     function loadData(){const saved=localStorage.getItem('scheduleDataFinal');if(!saved)return;const data=JSON.parse(saved);for(const key in data){if(key==='imgState'||key==='illust')continue;const el=document.getElementById(key);if(el)el.type==='checkbox'?(el.checked=data[key]):(el.value=data[key]);}if(data.imgState)imgState=data.imgState;if(data.illust){illustBase64=data.illust;loadIllustImage(illustBase64,false);document.getElementById('uploadFileName').textContent="저장된 일러스트 불러옴";document.getElementById('dropZone').style.display='none';document.getElementById('uploadPreview').style.display='block';document.getElementById('imageControlPanel').style.display='block';canvas.classList.add('draggable');}if(document.getElementById('weekPicker').value)handleDateSelect();['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>{toggleInputs(day);const ti=document.getElementById(day+'_time');const tb=document.getElementById(day+'_timebtn');if(ti&&tb&&ti.value)tb.textContent=ti.value;});}
     function clearData(){if(!confirm("모든 텍스트를 초기화하시겠습니까?"))return;document.querySelectorAll('.sched-input').forEach(el=>{el.value='';});document.querySelectorAll('.platform-select').forEach(el=>{el.value='none';});document.querySelectorAll('.sched-toggle').forEach(toggle=>{toggle.checked=true;toggleInputs(toggle.id.replace('_type',''));});removeIllust();['mon','tue','wed','thu','fri','sat','sun'].forEach(d=>{const tb=document.getElementById(d+'_timebtn');if(tb)tb.textContent='시간';});weekData={startMonth:"",startDate:"",endMonth:"",endDate:"",dayTexts:[]};saveData();drawSchedule();}
-    async function waitFonts(){const seen=new Set();const loads=[];Object.values(config.textStyles).forEach(s=>{if(s&&s.font&&!seen.has(s.font)){seen.add(s.font);loads.push(document.fonts.load(s.weight+' 32px "'+s.font+'"').catch(()=>{}));}});await document.fonts.ready;await Promise.all(loads);}
-    window.onload=function(){setupDropZone();setupCanvasDrag();['mon','tue','wed','thu','fri','sat','sun'].forEach(d=>{const el=document.getElementById(d+'_ampm');if(el&&!localStorage.getItem('scheduleDataFinal'))el.value='AM';});const saved=localStorage.getItem('scheduleDataFinal');if(saved)loadData();else['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>toggleInputs(day));waitFonts().then(()=>drawSchedule());document.querySelectorAll('input,select').forEach(el=>{if(el.id!=='weekPicker'&&el.type!=='file'&&el.id!=='zoomSlider'){el.addEventListener('input',()=>{saveData();drawSchedule();});el.addEventListener('change',()=>{saveData();drawSchedule();});}});};
+    function waitTypekit(){return new Promise(resolve=>{if(typeof Typekit!=='undefined'){resolve();return;}let tries=0;const iv=setInterval(()=>{tries++;if(typeof Typekit!=='undefined'||tries>60){clearInterval(iv);resolve();}},100);});} async function waitFonts(){const seen=new Set();const loads=[];Object.values(config.textStyles).forEach(s=>{if(s&&s.font&&!seen.has(s.font)){seen.add(s.font);loads.push(document.fonts.load(s.weight+' 32px "'+s.font+'"').catch(()=>{}));}});await document.fonts.ready;await Promise.all(loads);const warm=document.createElement('div');warm.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;pointer-events:none;';Object.values(config.textStyles).forEach(s=>{if(s&&s.font){const sp=document.createElement('span');sp.style.fontFamily='"'+s.font+'"';sp.style.fontWeight=s.weight||'normal';sp.style.fontSize='32px';sp.textContent='가나다ABC';warm.appendChild(sp);}});document.body.appendChild(warm);await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));document.body.removeChild(warm);}
+    window.onload=function(){setupDropZone();setupCanvasDrag();['mon','tue','wed','thu','fri','sat','sun'].forEach(d=>{const el=document.getElementById(d+'_ampm');if(el&&!localStorage.getItem('scheduleDataFinal'))el.value='AM';});const saved=localStorage.getItem('scheduleDataFinal');if(saved)loadData();else['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>toggleInputs(day));waitTypekit().then(()=>waitFonts()).then(()=>drawSchedule());document.querySelectorAll('input,select').forEach(el=>{if(el.id!=='weekPicker'&&el.type!=='file'&&el.id!=='zoomSlider'){el.addEventListener('input',()=>{saveData();drawSchedule();});el.addEventListener('change',()=>{saveData();drawSchedule();});}});};
     async function downloadImage(){try{await drawSchedule();const link=document.createElement('a');link.download='weekly_schedule_fhd.png';link.href=canvas.toDataURL('image/png');link.click();}catch{alert("이미지 저장 실패!\\nVS Code에서 Live Server로 열어주세요!");}}
     (function(){
       let _ti=null,_selH=19,_selM=0;
@@ -1225,15 +1145,11 @@ function collectState(){
   s.artistBg_use=document.getElementById('artistBg_use')?.checked??true;
   TS_DEFS.forEach(ts=>{['font','size','weight','color','align','sc','sw','rot','lh','ls','subFont'].forEach(k=>{const el=document.getElementById('ts_'+ts.id+'_'+k);if(el)s['ts_'+ts.id+'_'+k]=el.value;});});
   s._fonts=getFontEntries();
-  // Adobe Fonts 상태 저장
-  s._typekitKitId=getTypekitKitId();
-  s._typekitScript=getTypekitScriptRaw();
-  s._adobeFontNames=getAdobeFontEntries();
   return s;
 }
 function applyState(s){
   if(!s)return;
-  Object.entries(s).forEach(([id,val])=>{if(['_fonts','_typekitKitId','_typekitScript','_adobeFontNames'].includes(id))return;const el=document.getElementById(id);if(el)el.value=val;});
+  Object.entries(s).forEach(([id,val])=>{if(id==='_fonts')return;const el=document.getElementById(id);if(el)el.value=val;});
   refreshFontDropdowns();
   TS_DEFS.forEach(ts=>{
     const txt=document.getElementById('ts_'+ts.id+'_font');
@@ -1246,15 +1162,6 @@ function applyState(s){
   if(s._fonts&&s._fonts.length){document.getElementById('fontList').innerHTML='';fontEntries=[];s._fonts.forEach(f=>addFontEntry(f));}
   if(s.artistBg_use!==undefined){const cb=document.getElementById('artistBg_use');if(cb)cb.checked=!!s.artistBg_use;}
   if(s.artistBg_align){const sel=document.getElementById('artistBg_align');if(sel)sel.value=s.artistBg_align;}
-  // Adobe Fonts 복원
-  if(s._typekitKitId){const el=document.getElementById('typekitKitId');if(el)el.value=s._typekitKitId;}
-  if(s._typekitScript){const el=document.getElementById('typekitScript');if(el)el.value=s._typekitScript;}
-  if(s._adobeFontNames&&s._adobeFontNames.length){
-    document.getElementById('adobeFontList').innerHTML='';
-    adobeFontIdSeq=0;
-    s._adobeFontNames.forEach(name=>addAdobeFontName(name));
-  }
-  refreshFontDropdowns();
 }
 function autoSave(){const state=collectState();try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
 function autoLoad(){try{const r=localStorage.getItem(STORAGE_KEY);if(r)applyState(JSON.parse(r));}catch(e){}}
