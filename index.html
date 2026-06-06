@@ -1432,8 +1432,40 @@ ${'<scr'+'ipt>'}
     function saveData(showAlert=false){const data={};document.querySelectorAll('.sched-input,.sched-select').forEach(el=>{data[el.id]=el.value;});document.querySelectorAll('.sched-toggle').forEach(chk=>{data[chk.id]=chk.checked;});data.illust=illustBase64;data.imgState=imgState;try{localStorage.setItem('scheduleDataFinal',JSON.stringify(data));}catch{data.illust=null;localStorage.setItem('scheduleDataFinal',JSON.stringify(data));if(showAlert)alert("첨부된 이미지 용량이 커서 브라우저에 임시 저장할 수 없습니다.");}}
     function loadData(){const saved=localStorage.getItem('scheduleDataFinal');if(!saved)return;const data=JSON.parse(saved);for(const key in data){if(key==='imgState'||key==='illust')continue;const el=document.getElementById(key);if(el)el.type==='checkbox'?(el.checked=data[key]):(el.value=data[key]);}if(data.imgState)imgState=data.imgState;if(data.illust){illustBase64=data.illust;loadIllustImage(illustBase64,false);document.getElementById('uploadFileName').textContent="저장된 일러스트 불러옴";document.getElementById('dropZone').style.display='none';document.getElementById('uploadPreview').style.display='block';document.getElementById('imageControlPanel').style.display='block';canvas.classList.add('draggable');}if(document.getElementById('weekPicker').value)handleDateSelect();['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>{toggleInputs(day);const ti=document.getElementById(day+'_time');const tb=document.getElementById(day+'_timebtn');if(ti&&tb&&ti.value)tb.textContent=ti.value;});}
     function clearData(){if(!confirm("모든 텍스트를 초기화하시겠습니까?"))return;document.querySelectorAll('.sched-input').forEach(el=>{el.value='';});document.querySelectorAll('.platform-select').forEach(el=>{el.value='none';});document.querySelectorAll('.sched-toggle').forEach(toggle=>{toggle.checked=true;toggleInputs(toggle.id.replace('_type',''));});removeIllust();['mon','tue','wed','thu','fri','sat','sun'].forEach(d=>{const tb=document.getElementById(d+'_timebtn');if(tb)tb.textContent='시간';});weekData={startMonth:"",startDate:"",endMonth:"",endDate:"",dayTexts:[]};saveData();drawSchedule();}
-    function waitTypekit(){return new Promise(resolve=>{if(typeof Typekit!=='undefined'){resolve();return;}let tries=0;const iv=setInterval(()=>{tries++;if(typeof Typekit!=='undefined'||tries>60){clearInterval(iv);resolve();}},100);});}
-    function waitFonts(){return new Promise(resolve=>{const SILENCE_SLOW=800,SILENCE_FAST=150,FAST_THRESHOLD=200,TIMEOUT_MS=15000;const warm=document.createElement('div');warm.setAttribute('aria-hidden','true');warm.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;font-size:20px;white-space:nowrap;overflow:hidden;width:1px;height:1px;';let allHangul='';for(let cp=0xAC00;cp<=0xD7A3;cp++)allHangul+=String.fromCodePoint(cp);for(let cp=0x3131;cp<=0x3163;cp++)allHangul+=String.fromCodePoint(cp);const fontsSeen=new Set();Object.values(config.textStyles).forEach(s=>{if(!s||!s.font||fontsSeen.has(s.font+s.weight))return;fontsSeen.add(s.font+s.weight);const sp=document.createElement('span');sp.style.cssText='font-family:"'+s.font+'",sans-serif;font-weight:'+(s.weight||'normal')+';';sp.textContent=allHangul;warm.appendChild(sp);});document.body.appendChild(warm);let silenceTimer=null,globalTimer=null,firstEventTime=null,silenceMs=SILENCE_SLOW;function done(){clearTimeout(silenceTimer);clearTimeout(globalTimer);document.fonts.removeEventListener('loadingdone',onLoadingDone);document.body.removeChild(warm);resolve();}function resetSilenceTimer(){clearTimeout(silenceTimer);silenceTimer=setTimeout(done,silenceMs);}function onLoadingDone(){const now=Date.now();if(firstEventTime===null){firstEventTime=now;}else if(silenceMs===SILENCE_SLOW&&(now-firstEventTime)<FAST_THRESHOLD){silenceMs=SILENCE_FAST;}resetSilenceTimer();}document.fonts.addEventListener('loadingdone',onLoadingDone);globalTimer=setTimeout(done,TIMEOUT_MS);resetSilenceTimer();});}
+    function waitFonts(){return new Promise(resolve=>{
+      // 사용하는 폰트 목록 수집
+      const fontsSeen=new Set();
+      Object.values(config.textStyles).forEach(s=>{if(s&&s.font)fontsSeen.add(s.font+'|'+(s.weight||'normal'));});
+      // 캐시 체크: 폰트가 모두 이미 loaded면 waitTypekit 폴링 없이 즉시 통과
+      if(document.fonts.status==='loaded'){
+        let allLoaded=true;
+        fontsSeen.forEach(key=>{
+          const[family,weight]=key.split('|');
+          let found=false;
+          document.fonts.forEach(ff=>{if(ff.family.replace(/['"]/g,'')===family&&ff.status==='loaded')found=true;});
+          if(!found)allLoaded=false;
+        });
+        if(allLoaded){resolve();return;}
+      }
+      // 캐시 없음: waitTypekit 내부 처리 후 warm-up + silence 감지
+      function startWarmup(){
+        const SILENCE_MS=800,TIMEOUT_MS=15000;
+        const warm=document.createElement('div');warm.setAttribute('aria-hidden','true');warm.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;font-size:20px;white-space:nowrap;overflow:hidden;width:1px;height:1px;';
+        let allHangul='';for(let cp=0xAC00;cp<=0xD7A3;cp++)allHangul+=String.fromCodePoint(cp);for(let cp=0x3131;cp<=0x3163;cp++)allHangul+=String.fromCodePoint(cp);
+        fontsSeen.forEach(key=>{const[family,weight]=key.split('|');const sp=document.createElement('span');sp.style.cssText='font-family:"'+family+'",sans-serif;font-weight:'+weight+';';sp.textContent=allHangul;warm.appendChild(sp);});
+        document.body.appendChild(warm);
+        let silenceTimer=null,globalTimer=null;
+        function done(){clearTimeout(silenceTimer);clearTimeout(globalTimer);document.fonts.removeEventListener('loadingdone',onLoadingDone);document.body.removeChild(warm);resolve();}
+        function resetSilenceTimer(){clearTimeout(silenceTimer);silenceTimer=setTimeout(done,SILENCE_MS);}
+        function onLoadingDone(){resetSilenceTimer();}
+        document.fonts.addEventListener('loadingdone',onLoadingDone);
+        globalTimer=setTimeout(done,TIMEOUT_MS);resetSilenceTimer();
+      }
+      // Typekit 객체 대기 (내부 처리)
+      if(typeof Typekit!=='undefined'){startWarmup();return;}
+      let tries=0;const iv=setInterval(()=>{tries++;if(typeof Typekit!=='undefined'||tries>60){clearInterval(iv);startWarmup();}},100);
+    });}
+
 
     function toggleTimeInput(day){
       const btn=document.getElementById(day+'_tbtn');
@@ -1447,7 +1479,7 @@ ${'<scr'+'ipt>'}
       if(isText){textinput.value=hiddeninput.value||timebtn.textContent;textinput.focus();}
       else{hiddeninput.value=textinput.value;timebtn.textContent=textinput.value||timebtn.dataset.ph||'시간';}
     }
-    window.onload=function(){setupDropZone();setupCanvasDrag();const saved=localStorage.getItem('scheduleDataFinal');if(saved)loadData();else['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>toggleInputs(day));waitTypekit().then(()=>waitFonts()).then(()=>{fontsReady=true;drawSchedule();});document.querySelectorAll('.time-text-input').forEach(el=>{el.addEventListener('input',()=>{const day=el.id.replace('_timetext','');const hid=document.getElementById(day+'_time');if(hid)hid.value=el.value;const tb=document.getElementById(day+'_timebtn');if(tb)tb.textContent=el.value||'시간';saveData();drawSchedule();});});
+    window.onload=function(){setupDropZone();setupCanvasDrag();const saved=localStorage.getItem('scheduleDataFinal');if(saved)loadData();else['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>toggleInputs(day));waitFonts().then(()=>{fontsReady=true;drawSchedule();});document.querySelectorAll('.time-text-input').forEach(el=>{el.addEventListener('input',()=>{const day=el.id.replace('_timetext','');const hid=document.getElementById(day+'_time');if(hid)hid.value=el.value;const tb=document.getElementById(day+'_timebtn');if(tb)tb.textContent=el.value||'시간';saveData();drawSchedule();});});
     document.querySelectorAll('input,select').forEach(el=>{if(el.id!=='weekPicker'&&el.type!=='file'&&el.id!=='zoomSlider'){el.addEventListener('input',()=>{saveData();drawSchedule();});el.addEventListener('change',()=>{saveData();drawSchedule();});}});};
     async function downloadImage(){try{await drawSchedule();const link=document.createElement('a');link.download='weekly_schedule_fhd.png';link.href=canvas.toDataURL('image/png');link.click();}catch{alert("이미지 저장 실패!\\nVS Code에서 Live Server로 열어주세요!");}}
     (function(){
