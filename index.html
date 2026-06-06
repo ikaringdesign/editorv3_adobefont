@@ -200,25 +200,25 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
             <span></span>
             <span style="font-size:8px;color:#666;text-align:center">X</span>
             <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">월</span><button onclick="copyDayCoords('mon')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('mon')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_mon_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">화</span><button onclick="copyDayCoords('tue')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('tue')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_tue_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_tue_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">수</span><button onclick="copyDayCoords('wed')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('wed')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_wed_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_wed_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">목</span><button onclick="copyDayCoords('thu')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('thu')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_thu_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_thu_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">금</span><button onclick="copyDayCoords('fri')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('fri')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_fri_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_fri_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">토</span><button onclick="copyDayCoords('sat')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('sat')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_sat_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_sat_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
+            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">일</span><button onclick="copyDayCoords('sun')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('sun')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
             <input type="number" id="pd_sun_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_sun_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
           </div>
@@ -1503,6 +1503,27 @@ function applyState(s){
 function autoSave(){const state=collectState();try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
 function autoLoad(){try{const r=localStorage.getItem(STORAGE_KEY);if(r)applyState(JSON.parse(r));}catch(e){}}
 let saveTimer=null;
+let _copiedDayCoords = null;
+function copyDayCoords(day){
+  const keys=['ic_title_x','ic_title_y','ic_sub_x','ic_sub_y','ic_time_x','ic_time_y',
+               'ic_icon_x','ic_icon_y','ic_ampm_x','ic_ampm_y',
+               'ic_date_on_x','ic_date_on_y','ic_date_off_x','ic_date_off_y'];
+  _copiedDayCoords={};
+  keys.forEach(k=>{const el=document.getElementById('pd_'+day+'_'+k);if(el)_copiedDayCoords[k]=el.value;});
+  // 복사 피드백
+  document.querySelectorAll('[onclick^="copyDayCoords"]').forEach(b=>b.style.background='#0f3460');
+  const btn=document.querySelector(`[onclick="copyDayCoords('${day}')"]`);
+  if(btn){btn.style.background='#1a5a4a';setTimeout(()=>btn.style.background='#0f3460',800);}
+}
+function pasteDayCoords(day){
+  if(!_copiedDayCoords){alert('먼저 복사하세요');return;}
+  const keys=Object.keys(_copiedDayCoords);
+  keys.forEach(k=>{const el=document.getElementById('pd_'+day+'_'+k);if(el)el.value=_copiedDayCoords[k];});
+  onPerDayInput();
+  // 붙여넣기 피드백
+  const btn=document.querySelector(`[onclick="pasteDayCoords('${day}')"]`);
+  if(btn){btn.style.background='#1a3a6a';setTimeout(()=>btn.style.background='#0f3460',800);}
+}
 function togglePerDayCoords(){
   const on=document.getElementById('ic_per_day')?.checked;
   document.getElementById('ic_common_view').style.display=on?'none':'block';
