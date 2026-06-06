@@ -166,7 +166,7 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
     <div class="sec">
       <h2>🔲 innerCoords</h2>
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;padding:6px 8px;background:#0a0a1a;border-radius:4px;border:1px solid #2a2a4a;">
-        <input type="checkbox" id="ic_per_day" onchange="togglePerDayCoords()" style="accent-color:#e94560">
+        <input type="checkbox" id="ic_per_day" style="accent-color:#e94560">
         <label for="ic_per_day" style="font-size:10px;color:#aaa;cursor:pointer">요일별 개별 설정 (체크 해제 시 전체 동기화)</label>
       </div>
       <!-- 공통 모드 -->
@@ -403,7 +403,6 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
             <input type="number" id="pd_sun_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
           </div>
         </div>
-      </div>
       </div>
       <div style="display:flex;align-items:center;gap:8px;margin-top:5px">
         <label style="font-size:10px;color:#aaa;white-space:nowrap">textMaxWidth</label>
@@ -1515,6 +1514,7 @@ function togglePerDayCoords(){
   document.getElementById('ic_common_view').style.display=on?'none':'block';
   document.getElementById('ic_perday_view').style.display=on?'block':'none';
   if(on){
+    // 현재 공통 값을 아직 perDayCoords에 없는 요일에 복사
     IC_DAYS.forEach(d=>{
       IC_KEYS.forEach(k=>{
         const src=document.getElementById(k);
@@ -1535,7 +1535,17 @@ function onPerDayInput(){
   });
   scheduleAutoSave();
 }
-function switchPerDayView(){}
+function switchPerDayView(){
+  // 요일별 perday 뷰에서 요일 선택 시 해당 요일 값 표시
+  // (pd_XXX_yyy 필드들이 모두 동시에 표시되므로 별도 전환 불필요)
+  // 단 공통 입력란(ic_XXX)에 현재 선택 요일 값 반영
+  const day=document.getElementById('ic_perday_day_select')?.value||'mon';
+  IC_KEYS.forEach(k=>{
+    const src=document.getElementById('pd_'+day+'_'+k);
+    const dst=document.getElementById(k);
+    if(src&&dst)dst.value=src.value;
+  });
+}
 function saveCurrentDayCoords(){
   if(!document.getElementById('ic_per_day')?.checked)return;
   IC_DAYS.forEach(d=>{
@@ -1549,7 +1559,13 @@ function saveCurrentDayCoords(){
 function scheduleAutoSave(){if(typeof saveCurrentDayCoords==='function')saveCurrentDayCoords();clearTimeout(saveTimer);saveTimer=setTimeout(autoSave,300);}
 
 window.addEventListener('resize',()=>{if(imgEl){fitCanvas();redraw();}});
-window.addEventListener('load',()=>{autoLoad();setupViewControls();});
+window.addEventListener('load',()=>{
+  autoLoad();
+  setupViewControls();
+  // ic_per_day 체크박스 이벤트 바인딩
+  const icCb=document.getElementById('ic_per_day');
+  if(icCb)icCb.addEventListener('change',togglePerDayCoords);
+});
 document.addEventListener('input',e=>{if(e.target.closest('.left')){scheduleAutoSave();injectAndLoadFonts().then(()=>redraw());}});
 document.addEventListener('change',e=>{if(e.target.closest('.left')){scheduleAutoSave();injectAndLoadFonts().then(()=>redraw());}});
 </script>
