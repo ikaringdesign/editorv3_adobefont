@@ -1417,7 +1417,8 @@ ${'<scr'+'ipt>'}
       setupScroll(document.getElementById('drumMinScroll'),document.getElementById('drumMinList'),M,()=>_selM,v=>_selM=v);
       setTimeout(()=>{scrollTo(document.getElementById('drumHourList'),_selH,H,false);scrollTo(document.getElementById('drumMinList'),_selM,M,false);},0);
       const pop=document.getElementById('drumPopup');const r=btn.getBoundingClientRect();
-      pop.style.top=(r.bottom+6)+'px';pop.style.left=Math.min(r.left,window.innerWidth-210)+'px';
+      const popH=220;const topBelow=r.bottom+6;const topAbove=r.top-popH-6;
+      pop.style.top=(topBelow+popH>window.innerHeight&&topAbove>0?topAbove:topBelow)+'px';pop.style.left=Math.min(r.left,window.innerWidth-210)+'px';
       pop.classList.add('open');document.getElementById('drumOverlay').classList.add('open');};
       window.closeDrumPicker=function(){document.getElementById('drumPopup').classList.remove('open');document.getElementById('drumOverlay').classList.remove('open');};
       window.confirmDrumPicker=function(){if(_ti){const timeStr=String(_selH).padStart(2,'0')+':'+String(_selM).padStart(2,'0');_ti.value=timeStr;const btn=document.getElementById(_ti.id+'btn');if(btn)btn.textContent=timeStr;_ti.dispatchEvent(new Event('input',{bubbles:true}));_ti.dispatchEvent(new Event('change',{bubbles:true}));}closeDrumPicker();};
