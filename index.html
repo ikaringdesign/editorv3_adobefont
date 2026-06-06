@@ -193,206 +193,234 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
       </div>
       <!-- 요일별 모드 -->
       <div id="ic_perday_view" style="display:none;">
-        <div style="font-size:9px;color:#888;margin-bottom:8px;">각 항목의 X·Y를 요일별로 입력하세요</div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">title</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">월</span><button onclick="copyDayCoords('mon')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('mon')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
+        <div style="font-size:9px;color:#888;margin-bottom:8px;">각 요일별로 좌표를 설정하세요</div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">월요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('mon')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('mon')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
             <input type="number" id="pd_mon_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">화</span><button onclick="copyDayCoords('tue')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('tue')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
-            <input type="number" id="pd_tue_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_tue_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">수</span><button onclick="copyDayCoords('wed')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('wed')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
-            <input type="number" id="pd_wed_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_wed_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">목</span><button onclick="copyDayCoords('thu')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('thu')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
-            <input type="number" id="pd_thu_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_thu_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">금</span><button onclick="copyDayCoords('fri')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('fri')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
-            <input type="number" id="pd_fri_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_fri_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">토</span><button onclick="copyDayCoords('sat')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('sat')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
-            <input type="number" id="pd_sat_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sat_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><span style="font-size:9px;color:#aaa;">일</span><button onclick="copyDayCoords('sun')" title="복사" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#88aaff;cursor:pointer;white-space:nowrap;">📋</button><button onclick="pasteDayCoords('sun')" title="붙여넣기" style="font-size:8px;padding:1px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaffaa;cursor:pointer;white-space:nowrap;">📌</button></div>
-            <input type="number" id="pd_sun_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sun_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">sub</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <label style="font-size:9px;color:#aaa">sub</label>
             <input type="number" id="pd_mon_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
-            <input type="number" id="pd_tue_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_tue_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
-            <input type="number" id="pd_wed_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_wed_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
-            <input type="number" id="pd_thu_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_thu_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
-            <input type="number" id="pd_fri_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_fri_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
-            <input type="number" id="pd_sat_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sat_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
-            <input type="number" id="pd_sun_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sun_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">time</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <label style="font-size:9px;color:#aaa">time</label>
             <input type="number" id="pd_mon_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
-            <input type="number" id="pd_tue_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_tue_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
-            <input type="number" id="pd_wed_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_wed_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
-            <input type="number" id="pd_thu_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_thu_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
-            <input type="number" id="pd_fri_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_fri_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
-            <input type="number" id="pd_sat_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sat_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
-            <input type="number" id="pd_sun_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sun_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">icon</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <label style="font-size:9px;color:#aaa">icon</label>
             <input type="number" id="pd_mon_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
-            <input type="number" id="pd_tue_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_tue_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
-            <input type="number" id="pd_wed_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_wed_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
-            <input type="number" id="pd_thu_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_thu_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
-            <input type="number" id="pd_fri_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_fri_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
-            <input type="number" id="pd_sat_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sat_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
-            <input type="number" id="pd_sun_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sun_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">amPm</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <label style="font-size:9px;color:#aaa">amPm</label>
             <input type="number" id="pd_mon_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
-            <input type="number" id="pd_tue_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_tue_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
-            <input type="number" id="pd_wed_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_wed_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
-            <input type="number" id="pd_thu_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_thu_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
-            <input type="number" id="pd_fri_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_fri_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
-            <input type="number" id="pd_sat_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sat_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
-            <input type="number" id="pd_sun_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sun_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">dateOn</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <label style="font-size:9px;color:#aaa">dateON</label>
             <input type="number" id="pd_mon_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
-            <input type="number" id="pd_tue_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_tue_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
-            <input type="number" id="pd_wed_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_wed_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
-            <input type="number" id="pd_thu_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_thu_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
-            <input type="number" id="pd_fri_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_fri_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
-            <input type="number" id="pd_sat_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sat_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
-            <input type="number" id="pd_sun_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <input type="number" id="pd_sun_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-          </div>
-        </div>
-        <div style="margin-bottom:10px;">
-          <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:4px;">dateOff</div>
-          <div style="display:grid;grid-template-columns:24px 1fr 1fr;gap:3px;align-items:center;">
-            <span></span>
-            <span style="font-size:8px;color:#666;text-align:center">X</span>
-            <span style="font-size:8px;color:#666;text-align:center">Y</span>
-            <span style="font-size:9px;color:#aaa;text-align:center">월</span>
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_mon_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_mon_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">화</span>
+          </div>
+        </div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">화요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('tue')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('tue')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
+            <input type="number" id="pd_tue_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_tue_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">sub</label>
+            <input type="number" id="pd_tue_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_tue_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">time</label>
+            <input type="number" id="pd_tue_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_tue_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">icon</label>
+            <input type="number" id="pd_tue_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_tue_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">amPm</label>
+            <input type="number" id="pd_tue_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_tue_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateON</label>
+            <input type="number" id="pd_tue_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_tue_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_tue_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_tue_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">수</span>
+          </div>
+        </div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">수요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('wed')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('wed')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
+            <input type="number" id="pd_wed_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_wed_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">sub</label>
+            <input type="number" id="pd_wed_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_wed_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">time</label>
+            <input type="number" id="pd_wed_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_wed_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">icon</label>
+            <input type="number" id="pd_wed_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_wed_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">amPm</label>
+            <input type="number" id="pd_wed_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_wed_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateON</label>
+            <input type="number" id="pd_wed_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_wed_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_wed_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_wed_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">목</span>
+          </div>
+        </div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">목요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('thu')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('thu')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
+            <input type="number" id="pd_thu_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_thu_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">sub</label>
+            <input type="number" id="pd_thu_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_thu_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">time</label>
+            <input type="number" id="pd_thu_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_thu_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">icon</label>
+            <input type="number" id="pd_thu_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_thu_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">amPm</label>
+            <input type="number" id="pd_thu_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_thu_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateON</label>
+            <input type="number" id="pd_thu_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_thu_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_thu_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_thu_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">금</span>
+          </div>
+        </div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">금요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('fri')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('fri')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
+            <input type="number" id="pd_fri_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_fri_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">sub</label>
+            <input type="number" id="pd_fri_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_fri_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">time</label>
+            <input type="number" id="pd_fri_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_fri_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">icon</label>
+            <input type="number" id="pd_fri_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_fri_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">amPm</label>
+            <input type="number" id="pd_fri_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_fri_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateON</label>
+            <input type="number" id="pd_fri_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_fri_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_fri_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_fri_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">토</span>
+          </div>
+        </div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">토요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('sat')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('sat')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
+            <input type="number" id="pd_sat_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sat_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">sub</label>
+            <input type="number" id="pd_sat_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sat_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">time</label>
+            <input type="number" id="pd_sat_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sat_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">icon</label>
+            <input type="number" id="pd_sat_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sat_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">amPm</label>
+            <input type="number" id="pd_sat_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sat_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateON</label>
+            <input type="number" id="pd_sat_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sat_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_sat_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_sat_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
-            <span style="font-size:9px;color:#aaa;text-align:center">일</span>
+          </div>
+        </div>
+        <div style="background:#0d0d2a;border:1px solid #2a2a4a;border-radius:6px;padding:7px 8px;margin-bottom:6px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10px;font-weight:bold;color:#e94560;">일요일</span>
+            <div style="display:flex;gap:4px;">
+              <button onclick="copyDayCoords('sun')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a9a;border-radius:3px;color:#88aaff;cursor:pointer;">📋 복사</button>
+              <button onclick="pasteDayCoords('sun')" style="font-size:9px;padding:2px 7px;background:#0f3460;border:1px solid #2a5a2a;border-radius:3px;color:#88ff88;cursor:pointer;">📌 붙여넣기</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:52px 1fr 1fr;gap:3px;align-items:center;">
+            <span></span><span style="font-size:8px;color:#666;text-align:center">X</span><span style="font-size:8px;color:#666;text-align:center">Y</span>
+            <label style="font-size:9px;color:#aaa">title</label>
+            <input type="number" id="pd_sun_ic_title_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sun_ic_title_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">sub</label>
+            <input type="number" id="pd_sun_ic_sub_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sun_ic_sub_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">time</label>
+            <input type="number" id="pd_sun_ic_time_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sun_ic_time_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">icon</label>
+            <input type="number" id="pd_sun_ic_icon_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sun_ic_icon_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">amPm</label>
+            <input type="number" id="pd_sun_ic_ampm_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sun_ic_ampm_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateON</label>
+            <input type="number" id="pd_sun_ic_date_on_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <input type="number" id="pd_sun_ic_date_on_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
+            <label style="font-size:9px;color:#aaa">dateOFF</label>
             <input type="number" id="pd_sun_ic_date_off_x" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
             <input type="number" id="pd_sun_ic_date_off_y" value="0" oninput="onPerDayInput()" style="padding:4px 5px;border-radius:3px;border:1px solid #2a2a4a;background:#0a0a2a;color:#eee;font-size:10px;outline:none;width:100%;text-align:center">
           </div>
@@ -1510,19 +1538,18 @@ function copyDayCoords(day){
                'ic_date_on_x','ic_date_on_y','ic_date_off_x','ic_date_off_y'];
   _copiedDayCoords={};
   keys.forEach(k=>{const el=document.getElementById('pd_'+day+'_'+k);if(el)_copiedDayCoords[k]=el.value;});
-  // 복사 피드백
-  document.querySelectorAll('[onclick^="copyDayCoords"]').forEach(b=>b.style.background='#0f3460');
   const btn=document.querySelector(`[onclick="copyDayCoords('${day}')"]`);
-  if(btn){btn.style.background='#1a5a4a';setTimeout(()=>btn.style.background='#0f3460',800);}
+  if(btn){const orig=btn.style.background;btn.textContent='✅ 복사됨';setTimeout(()=>{btn.textContent='📋 복사';btn.style.background=orig;},900);}
 }
 function pasteDayCoords(day){
   if(!_copiedDayCoords){alert('먼저 복사하세요');return;}
-  const keys=Object.keys(_copiedDayCoords);
-  keys.forEach(k=>{const el=document.getElementById('pd_'+day+'_'+k);if(el)el.value=_copiedDayCoords[k];});
+  Object.keys(_copiedDayCoords).forEach(k=>{
+    const el=document.getElementById('pd_'+day+'_'+k);
+    if(el)el.value=_copiedDayCoords[k];
+  });
   onPerDayInput();
-  // 붙여넣기 피드백
   const btn=document.querySelector(`[onclick="pasteDayCoords('${day}')"]`);
-  if(btn){btn.style.background='#1a3a6a';setTimeout(()=>btn.style.background='#0f3460',800);}
+  if(btn){const orig=btn.textContent;btn.textContent='✅ 완료';setTimeout(()=>btn.textContent=orig,900);}
 }
 function togglePerDayCoords(){
   const on=document.getElementById('ic_per_day')?.checked;
