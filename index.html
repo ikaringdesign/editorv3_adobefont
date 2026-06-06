@@ -522,6 +522,35 @@ header p{font-size:10px;color:#aaa;margin-top:1px}
           <input type="number" id="ac_y" value="1077" style="padding:4px;border-radius:3px;border:1px solid #2a2a4a;background:#0f3460;color:#eee;font-size:10px;outline:none;width:100%">
         </div>
       </div>
+      <div class="coord-block" style="margin-top:6px;">
+        <div style="font-size:9px;color:#e94560;font-weight:bold;margin-bottom:6px;">🖼 플랫폼 아이콘 업로드 (base64 내장)</div>
+        <div style="font-size:8px;color:#666;margin-bottom:6px;">업로드하면 생성 시 이미지 파일 없이도 아이콘 표시</div>
+        <div style="display:grid;grid-template-columns:40px 1fr 60px;gap:4px;align-items:center;">
+          <span style="font-size:9px;color:#aaa">치지직</span>
+          <span id="pi_chzzk_label" style="font-size:8px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">미업로드</span>
+          <button onclick="document.getElementById('pi_chzzk_file').click()" style="font-size:8px;padding:2px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaa;cursor:pointer;">📁업로드</button>
+          <input type="file" id="pi_chzzk_file" accept="image/*" style="display:none" onchange="onPlatformIconUpload('chzzk',event)">
+          <input type="hidden" id="pi_chzzk_src">
+
+          <span style="font-size:9px;color:#aaa">유튜브</span>
+          <span id="pi_youtube_label" style="font-size:8px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">미업로드</span>
+          <button onclick="document.getElementById('pi_youtube_file').click()" style="font-size:8px;padding:2px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaa;cursor:pointer;">📁업로드</button>
+          <input type="file" id="pi_youtube_file" accept="image/*" style="display:none" onchange="onPlatformIconUpload('youtube',event)">
+          <input type="hidden" id="pi_youtube_src">
+
+          <span style="font-size:9px;color:#aaa">트위치</span>
+          <span id="pi_twitch_label" style="font-size:8px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">미업로드</span>
+          <button onclick="document.getElementById('pi_twitch_file').click()" style="font-size:8px;padding:2px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaa;cursor:pointer;">📁업로드</button>
+          <input type="file" id="pi_twitch_file" accept="image/*" style="display:none" onchange="onPlatformIconUpload('twitch',event)">
+          <input type="hidden" id="pi_twitch_src">
+
+          <span style="font-size:9px;color:#aaa">숲(SOOP)</span>
+          <span id="pi_soop_label" style="font-size:8px;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">미업로드</span>
+          <button onclick="document.getElementById('pi_soop_file').click()" style="font-size:8px;padding:2px 4px;background:#0f3460;border:1px solid #2a2a4a;border-radius:3px;color:#aaa;cursor:pointer;">📁업로드</button>
+          <input type="file" id="pi_soop_file" accept="image/*" style="display:none" onchange="onPlatformIconUpload('soop',event)">
+          <input type="hidden" id="pi_soop_src">
+        </div>
+      </div>
     </div>
     <div class="sec">
       <h2>🎨 아티스트 BG</h2>
@@ -932,6 +961,8 @@ function getPreviewTextStyles(){
   const s={};
   TS_DEFS.forEach(ts=>{
     s[ts.id]={font:gs('ts_'+ts.id+'_font')||'sans-serif',size:parseInt(gs('ts_'+ts.id+'_size'))||parseInt(ts.size)||20,color:gs('ts_'+ts.id+'_color')||ts.color||'#fff',align:gs('ts_'+ts.id+'_align')||ts.align||'center',weight:gs('ts_'+ts.id+'_weight')||ts.weight||'normal',rotate:parseFloat(document.getElementById('ts_'+ts.id+'_rot')?.value||0),letterSpacing:(()=>{const v=parseFloat(document.getElementById('ts_'+ts.id+'_ls')?.value||0);return v?v+'px':null;})()};
+    const lhEl=document.getElementById('ts_'+ts.id+'_lh');
+    if(lhEl&&lhEl.value)s[ts.id].lineHeight=parseFloat(lhEl.value);
     const sc=gs('ts_'+ts.id+'_sc'),sw=gi('ts_'+ts.id+'_sw');
     if(sc&&sw>0){s[ts.id].strokeColor=sc;s[ts.id].strokeWidth=sw;}
   });
@@ -1022,6 +1053,7 @@ function generate(useFolder=false){
   const textStyles={};
   TS_DEFS.forEach(ts=>{
     const obj={font:gs('ts_'+ts.id+'_font')||ts.font,size:(gs('ts_'+ts.id+'_size')||String(parseInt(ts.size)||30))+'px',color:gs('ts_'+ts.id+'_color')||ts.color,align:gs('ts_'+ts.id+'_align')||ts.align,weight:gs('ts_'+ts.id+'_weight')||ts.weight};
+    const lhEl=document.getElementById('ts_'+ts.id+'_lh');if(lhEl&&lhEl.value)obj.lineHeight=parseFloat(lhEl.value);
     const sc=gs('ts_'+ts.id+'_sc'),sw=gi('ts_'+ts.id+'_sw');if(sc&&sw>0){obj.strokeColor=sc;obj.strokeWidth=sw;}const shb=gi('ts_'+ts.id+'_shb')||0,shx=gi('ts_'+ts.id+'_shx')||0,shy=gi('ts_'+ts.id+'_shy')||0,shc=gs('ts_'+ts.id+'_shc')||'#000000';if(shb>0||shx!==0||shy!==0){obj.shadow={color:shc,blur:shb,x:shx,y:shy};}
     const rot=parseFloat(document.getElementById('ts_'+ts.id+'_rot')?.value||0);if(rot!==0)obj.rotate=rot;
     const ls=parseFloat(document.getElementById('ts_'+ts.id+'_ls')?.value||0);if(ls!==0)obj.letterSpacing=ls+'px';
@@ -1057,7 +1089,12 @@ function generate(useFolder=false){
   const config={
     imgSrc:'image/bg.png',illustBox,textStyles,textMaxWidth,innerCoords,topDateCoords,
     dateRangeStartCoords,dateRangeEndCoords,
-    platforms:{chzzk:'image/icon_chzzk.png',youtube:'image/icon_youtube.png',twitch:'image/icon_twitch.png',soop:'image/icon_soop.png'},
+    platforms:{
+      chzzk: document.getElementById('pi_chzzk_src')?.value || 'image/icon_chzzk.png',
+      youtube: document.getElementById('pi_youtube_src')?.value || 'image/icon_youtube.png',
+      twitch: document.getElementById('pi_twitch_src')?.value || 'image/icon_twitch.png',
+      soop: document.getElementById('pi_soop_src')?.value || 'image/icon_soop.png'
+    },
     iconSize,artistLabelCoords,artistCoords,
     artistBgImage:artistBgUse?(gs('artistBg_path')||'image/artist_bg.png'):null,
     artistBgUse,artistBgAlign,artistPadding,artistBgSlice,dayConfig
@@ -1461,7 +1498,8 @@ function collectState(){
    'ic_date_on_x','ic_date_on_y','ic_date_off_x','ic_date_off_y',
    'ic_title_x','ic_title_y','ic_sub_x','ic_sub_y',
    'ic_time_x','ic_time_y','ic_icon_x','ic_icon_y','ic_ampm_x','ic_ampm_y','textMaxWidth',
-   'abs_left','abs_right','abp_x','abp_y','artistBg_align','artistBg_path'
+   'abs_left','abs_right','abp_x','abp_y','artistBg_align','artistBg_path',
+   'pi_chzzk_src','pi_youtube_src','pi_twitch_src','pi_soop_src'
   ].forEach(id=>{const el=document.getElementById(id);if(el)s[id]=el.value;});
   s.artistBg_use=document.getElementById('artistBg_use')?.checked??true;
   s.showTextPreview=document.getElementById('showTextPreview')?.checked??false;
@@ -1528,6 +1566,12 @@ function applyState(s){
   }
   if(s.artistBg_use!==undefined){const cb=document.getElementById('artistBg_use');if(cb)cb.checked=!!s.artistBg_use;}
   if(s.artistBg_align){const sel=document.getElementById('artistBg_align');if(sel)sel.value=s.artistBg_align;}
+  // 플랫폼 아이콘 src 복원 시 레이블 업데이트
+  ['chzzk','youtube','twitch','soop'].forEach(p=>{
+    const src=document.getElementById('pi_'+p+'_src');
+    const lbl=document.getElementById('pi_'+p+'_label');
+    if(src&&src.value&&src.value.startsWith('data:')&&lbl){lbl.textContent='✅ 저장됨';lbl.style.color='#44ff88';}
+  });
 }
 function autoSave(){const state=collectState();try{localStorage.setItem(STORAGE_KEY,JSON.stringify(state));}catch(e){}}
 function autoLoad(){try{const r=localStorage.getItem(STORAGE_KEY);if(r)applyState(JSON.parse(r));}catch(e){}}
@@ -1551,6 +1595,18 @@ function pasteDayCoords(day){
   onPerDayInput();
   const btn=document.querySelector(`[onclick="pasteDayCoords('${day}')"]`);
   if(btn){const orig=btn.textContent;btn.textContent='✅ 완료';setTimeout(()=>btn.textContent=orig,900);}
+}
+function onPlatformIconUpload(platform, event){
+  const file = event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    document.getElementById('pi_'+platform+'_src').value = e.target.result;
+    document.getElementById('pi_'+platform+'_label').textContent = '✅ '+file.name;
+    document.getElementById('pi_'+platform+'_label').style.color = '#44ff88';
+    scheduleAutoSave();
+  };
+  reader.readAsDataURL(file);
 }
 function togglePerDayCoords(){
   const on=document.getElementById('ic_per_day')?.checked;
