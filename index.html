@@ -1169,7 +1169,7 @@ function generate(useFolder=false){
       "            font-display: block;",
       "        }"].join('\n');
   }).join('\n');
-  const fontPreloadDivs=fonts.map(f=>"<div style=\"font-family: '"+f.family+"'; position: absolute; opacity: 0;\">.</div>").join('\n');
+  const fontPreloadDivs=fonts.map(f=>"<div style=\"font-family: '"+f.family+"'; position: absolute; opacity: 0;\">0123456789ABCabc.가나다</div>").join('\n');
   function toJsLiteral(obj,indent=0){
     const pad=' '.repeat(indent+4),closePad=' '.repeat(indent);
     if(obj===null)return'null';
@@ -1423,7 +1423,7 @@ ${fontPreloadDivs}
         </div>
         <div class="card">
             <div class="card-title">요일별 스케줄</div>
-            <div class="form-hint">텍스트에 <b>//</b> 를 넣으면 줄바꿈이 됩니다<br>텍스트에 <b>[+n]</b> 또는 <b>[-n]</b> 을 넣으면 글자 크기가 n만큼 커지거나 작아집니다 (예: 제목[+10])</div>
+            <div class="form-hint">텍스트에 <b>//</b> 를 넣으면 줄바꿈이 됩니다<br>텍스트에 <b>[+n]</b> 또는 <b>[-n]</b> 을 넣으면 글자 크기가 n만큼 커지거나 작아집니다 (예: [+10]오늘 겜방합니당!)</div>
             <div id="daysContainer">
                 ${['mon','tue','wed','thu','fri','sat','sun'].map((d,i)=>{const kr=['월요일','화요일','수요일','목요일','금요일','토요일','일요일'][i];const ph=i===0?'19:00':'시간';return '<div class="day-row '+d+'"><div class="day-col-left"><span class="day-label">'+kr+'</span><label class="toggle-switch"><input type="checkbox" id="'+d+'_type" class="sched-toggle" checked onchange="toggleInputs(\''+d+'\')"><span class="slider"></span></label></div><div class="day-col-body"><div id="'+d+'_offline" class="offline-text">휴방</div><div class="day-col-center"><input type="text" id="'+d+'" class="sched-input day-input" placeholder="메인 타이틀"><input type="text" id="'+d+'_sub" class="sched-input day-input sub-input" placeholder="서브 텍스트"></div><div class="day-col-right"><div class="time-ampm-row"><div class="time-picker-wrap time-half"><input type="hidden" id="'+d+'_time" class="sched-input"><button type="button" class="time-display-btn" id="'+d+'_timebtn" onclick="openDrumPicker(document.getElementById(this.dataset.tid),this)" data-tid="'+d+'_time">'+ph+'</button><input type="text" id="'+d+'_timetext" class="time-text-input sched-input" placeholder="직접입력" style="display:none"></div><button type="button" class="time-text-btn ampm-half" id="'+d+'_tbtn" onclick="toggleTimeInput(\''+d+'\')" >𝐓</button></div><select id="'+d+'_platform" class="sched-select platform-select"><option value="none">플랫폼</option><option value="chzzk">치지직</option><option value="youtube">유튜브</option><option value="twitch">트위치</option><option value="soop">숲</option><option value="cime">씨미</option></select></div></div></div>';}).join('')}
             </div>
@@ -1504,10 +1504,11 @@ ${'<scr'+'ipt>'}
         const SILENCE_MS=800,TIMEOUT_MS=15000;
         const warm=document.createElement('div');warm.setAttribute('aria-hidden','true');warm.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;font-size:20px;white-space:nowrap;overflow:hidden;width:1px;height:1px;';
         let allHangul='';for(let cp=0xAC00;cp<=0xD7A3;cp++)allHangul+=String.fromCodePoint(cp);for(let cp=0x3131;cp<=0x3163;cp++)allHangul+=String.fromCodePoint(cp);
+        allHangul+='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz .,:;!?+-_/@#&*()[]%';
         fontsSeen.forEach(key=>{const[family,weight]=key.split('|');const sp=document.createElement('span');sp.style.cssText='font-family:"'+family+'",sans-serif;font-weight:'+weight+';';sp.textContent=allHangul;warm.appendChild(sp);});
         document.body.appendChild(warm);
         let silenceTimer=null,globalTimer=null;
-        function done(){clearTimeout(silenceTimer);clearTimeout(globalTimer);document.fonts.removeEventListener('loadingdone',onLoadingDone);document.body.removeChild(warm);resolve();}
+        function done(){clearTimeout(silenceTimer);clearTimeout(globalTimer);document.fonts.removeEventListener('loadingdone',onLoadingDone);resolve();}
         function resetSilenceTimer(){clearTimeout(silenceTimer);silenceTimer=setTimeout(done,SILENCE_MS);}
         function onLoadingDone(){resetSilenceTimer();}
         document.fonts.addEventListener('loadingdone',onLoadingDone);
@@ -1535,7 +1536,7 @@ ${'<scr'+'ipt>'}
     }
     window.onload=function(){setupDropZone();setupCanvasDrag();const saved=localStorage.getItem('scheduleDataFinal');if(saved)loadData();else['mon','tue','wed','thu','fri','sat','sun'].forEach(day=>toggleInputs(day));waitFonts().then(()=>{fontsReady=true;drawSchedule();});document.querySelectorAll('.time-text-input').forEach(el=>{el.addEventListener('input',()=>{const day=el.id.replace('_timetext','');const hid=document.getElementById(day+'_time');if(hid)hid.value=el.value;const tb=document.getElementById(day+'_timebtn');if(tb)tb.textContent=el.value||'시간';saveData();drawSchedule();});});
     document.querySelectorAll('input,select').forEach(el=>{if(el.id!=='weekPicker'&&el.type!=='file'&&el.id!=='zoomSlider'&&el.id!=='rotateSlider'){el.addEventListener('input',()=>{saveData();drawSchedule();});el.addEventListener('change',()=>{saveData();drawSchedule();});}});};
-    async function downloadImage(){try{await drawSchedule();const link=document.createElement('a');link.download='weekly_schedule_fhd.png';link.href=canvas.toDataURL('image/png');link.click();}catch{alert("이미지 저장 실패!\\nVS Code에서 Live Server로 열어주세요!");}}
+    function downloadImage(){try{const link=document.createElement('a');link.download='weekly_schedule_fhd.png';link.href=canvas.toDataURL('image/png');document.body.appendChild(link);link.click();document.body.removeChild(link);}catch(e){alert("이미지 저장 실패!\\n사파리에서는 이 파일을 더블클릭으로 바로 열지 말고, 웹서버(예: VS Code Live Server)로 열어주세요.\\n(사파리는 file:// 로 연 로컬 이미지를 캔버스에 그리면 보안상 저장을 막습니다)");}}
     ${drumPickerScript}
 <\/script>
 
